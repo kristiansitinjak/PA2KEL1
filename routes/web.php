@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/404', function () {
@@ -18,8 +18,8 @@ Route::get('/blog', function () {
     return view('blog');
 });
 
-Route::get('/causes', function () {
-    return view('causes');
+Route::get('/news', function () {
+    return view('news');
 });
 
 Route::get('/contact', function () {

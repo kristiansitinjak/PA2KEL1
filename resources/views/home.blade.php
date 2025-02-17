@@ -1,155 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-
-    <head>
-        <meta charset="utf-8">
-        <title>HIMATIF</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="" name="keywords">
-        <meta content="" name="description">
-
-        <!-- Google Web Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Roboto&display=swap" rel="stylesheet"> 
-
-        <!-- Icon Font Stylesheet -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-        <!-- Libraries Stylesheet -->
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
-
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-
-    <body>
-
-        <!-- Spinner Start -->
+@extends('layouts.app')
+@section('content')
+@include('partials.carousel')
+@section('partials.navbar')
+<!-- Spinner Start -->
         <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
             <div class="spinner-grow text-primary" role="status"></div>
         </div>
         <!-- Spinner End -->
 
 
-            <!-- Navbar Start -->
-            <div class="container-fluid fixed-top px-0">
-                <div class="container px-0">
-                    <div class="topbar">
-                        <div class="row align-items-center justify-content-center">
-                            <div class="col-md-8"></div>
-                            <div class="col-md-4">
-                                <div class="topbar-icon d-flex align-items-center justify-content-end">
-                                    <a href="#" class="btn-square text-white me-2"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="btn-square text-white me-2"><i class="fab fa-twitter"></i></a>
-                                    <a href="#" class="btn-square text-white me-2"><i class="fab fa-instagram"></i></a>
-                                    <a href="#" class="btn-square text-white me-2"><i class="fab fa-pinterest"></i></a>
-                                    <a href="#" class="btn-square text-white me-0"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <nav class="navbar navbar-light bg-light navbar-expand-xl">
-                        <a href="{{ route('home') }}" class="navbar-brand ms-3">
-                            <h1 class="text-primary display-5">HIMATIF</h1>
-                        </a>
-                        <button class="navbar-toggler py-2 px-3 me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                            <span class="fa fa-bars text-primary"></span>
-                        </button>
-
-                        <div class="collapse navbar-collapse bg-light" id="navbarCollapse">
-                            <div class="navbar-nav ms-auto">
-                                <a href="{{ route('home') }}" class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a>
-                                <a href="{{ route('about') }}" class="nav-item nav-link {{ request()->is('about') ? 'active' : '' }}">About</a>
-                                <a href="{{ route('service') }}" class="nav-item nav-link {{ request()->is('service') ? 'active' : '' }}">Services</a>
-                                <a href="{{ route('causes') }}" class="nav-item nav-link {{ request()->is('causes') ? 'active' : '' }}">Causes</a>
-                                <a href="{{ route('events') }}" class="nav-item nav-link {{ request()->is('events') ? 'active' : '' }}">Events</a>
-
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                    <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                        <a href="{{ route('blog') }}" class="dropdown-item">Blog</a>
-                                        <a href="{{ route('gallery') }}" class="dropdown-item">Gallery</a>
-                                        <a href="{{ route('volunteer') }}" class="dropdown-item">Volunteers</a>
-                                        <a href="{{ route('donation') }}" class="dropdown-item">Donation</a>
-                                        <a href="{{ route('error404') }}" class="dropdown-item">404 Error</a>
-                                    </div>
-                                </div>
-
-                                <a href="{{ route('contact') }}" class="nav-item nav-link {{ request()->is('contact') ? 'active' : '' }}">Contact</a>
-                            </div>
-
-                            <div class="d-flex align-items-center flex-nowrap pt-xl-0" style="margin-left: 15px;">
-                                <a href="#" class="btn-hover-bg btn btn-primary text-white py-2 px-4 me-3">Donate Now</a>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-            <!-- Navbar End -->
-
+        <!-- Navbar start -->
+        
+        <!-- Navbar End -->
 
         
        <!-- Carousel Start -->
-        <div class="container-fluid carousel-header vh-100 px-0">
-            <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active"></li>
-                    <li data-bs-target="#carouselId" data-bs-slide-to="1"></li>
-                    <li data-bs-target="#carouselId" data-bs-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item active">
-                        <img src="img/carousel-1.jpg" class="img-fluid" alt="Image">
-                        <div class="carousel-caption">
-                            <div class="p-3" style="max-width: 900px;">
-                                <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">HIMPUNAN MAHASISWA TEKNOLOGI INFORMASI</h4>
-                                <h1 class="display-1 text-capitalize text-white mb-4">HIMATIF</h1>
-                                <p class="mb-5 fs-5">Program Studi Teknologi Informasi Diploma Tiga  adalah salah satu dari 3 (tiga) program studi yang dikelola oleh Institut Teknologi Del (IT Del) yang berdiri pada tahun 2001 sesuai SK No. 222/D/O/2001 tertanggal 28 September 2001 dengan nama Program Studi Teknologi Informasi. 
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/carousel-2.jpg" class="img-fluid" alt="Image">
-                        <div class="carousel-caption">
-                            <div class="p-3" style="max-width: 900px;">
-                                <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">HIMPUNAN MAHASISWA TEKNOLOGI INFORMASI</h4>
-                                <h1 class="display-1 text-capitalize text-white mb-4">HIMATIF</h1>
-                                <p class="mb-5 fs-5">Program Studi Teknologi Informasi Diploma Tiga  adalah salah satu dari 3 (tiga) program studi yang dikelola oleh Institut Teknologi Del (IT Del) yang berdiri pada tahun 2001 sesuai SK No. 222/D/O/2001 tertanggal 28 September 2001 dengan nama Program Studi Teknologi Informasi.  
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/carousel-3.jpg" class="img-fluid" alt="Image">
-                        <div class="carousel-caption">
-                            <div class="p-3" style="max-width: 900px;">
-                                <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">HIMPUNAN MAHASISWA TEKNOLOGI INFORMASI</h4>
-                                <h1 class="display-1 text-capitalize text-white mb-4">HIMATIF</h1>
-                                <p class="mb-5 fs-5">Program Studi Teknologi Informasi Diploma Tiga  adalah salah satu dari 3 (tiga) program studi yang dikelola oleh Institut Teknologi Del (IT Del) yang berdiri pada tahun 2001 sesuai SK No. 222/D/O/2001 tertanggal 28 September 2001 dengan nama Program Studi Teknologi Informasi.  
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
+       
         <!-- Carousel End -->
 
 
@@ -281,6 +147,7 @@
 
 
         <!-- Donation Start -->
+<<<<<<< HEAD:resources/views/welcome.blade.php
         <div class="container-fluid donation py-5">
             <div class="container py-5">
                 <div class="text-center mx-auto pb-5" style="max-width: 800px;">
@@ -338,6 +205,8 @@
                 </div>
             </div>
         </div>
+=======
+>>>>>>> cc34142c4e7ba5a8804de14dbb0766754b324627:resources/views/home.blade.php
         <!-- Donation End -->
 
 
@@ -575,105 +444,6 @@
         <!-- Events End -->
 
         <!-- Blog Start -->
-        <div class="container-fluid blog py-5 mb-5">
-            <div class="container py-5">
-                <div class="text-center mx-auto pb-5" style="max-width: 800px;">
-                    <h5 class="text-uppercase text-primary">Latest News</h5>
-                    <h1 class="mb-0">Help today because tomorrow you may be the one who needs more helping!
-                    </h1>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-6 col-xl-3">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <img src="img/blog-1.jpg" class="img-fluid w-100" alt="">
-                                <div class="blog-info">
-                                    <span><i class="fa fa-clock"></i> Dec 01.2024</span>
-                                    <div class="d-flex">
-                                        <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
-                                        <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
-                                    </div>
-                                </div>
-                                <div class="search-icon">
-                                    <a href="img/blog-1.jpg" data-lightbox="Blog-1" class="my-auto"><i class="fas fa-search-plus btn-primary text-white p-3"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-dark border p-4 ">
-                                <h4 class="mb-4">Save The Topic Forests</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip sed eiusmod tempor.</p>
-                                <a class="btn-hover-bg btn btn-primary text-white py-2 px-4" href="#">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-3">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <img src="img/blog-2.jpg" class="img-fluid w-100" alt="">
-                                <div class="blog-info">
-                                    <span><i class="fa fa-clock"></i> Dec 01.2024</span>
-                                    <div class="d-flex">
-                                        <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
-                                        <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
-                                    </div>
-                                </div>
-                                <div class="search-icon">
-                                    <a href="img/blog-2.jpg" data-lightbox="Blog-2" class="my-auto"><i class="fas fa-search-plus btn-primary text-white p-3"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-dark border p-4 ">
-                                <h4 class="mb-4">Save The Topic Forests</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip sed eiusmod tempor.</p>
-                                <a class="btn-hover-bg btn btn-primary text-white py-2 px-4" href="#">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-3">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <img src="img/blog-3.jpg" class="img-fluid w-100" alt="">
-                                <div class="blog-info">
-                                    <span><i class="fa fa-clock"></i> Dec 01.2024</span>
-                                    <div class="d-flex">
-                                        <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
-                                        <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
-                                    </div>
-                                </div>
-                                <div class="search-icon">
-                                    <a href="img/blog-3.jpg" data-lightbox="Blog-3" class="my-auto"><i class="fas fa-search-plus btn-primary text-white p-3"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-dark border p-4 ">
-                                <h4 class="mb-4">Save The Topic Forests</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip sed eiusmod tempor.</p>
-                                <a class="btn-hover-bg btn btn-primary text-white py-2 px-4" href="#">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-3">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <img src="img/blog-4.jpg" class="img-fluid w-100" alt="">
-                                <div class="blog-info">
-                                    <span><i class="fa fa-clock"></i> Dec 01.2024</span>
-                                    <div class="d-flex">
-                                        <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
-                                        <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
-                                    </div>
-                                </div>
-                                <div class="search-icon">
-                                    <a href="img/blog-4.jpg" data-lightbox="Blog-4" class="my-auto"><i class="fas fa-search-plus btn-primary text-white p-3"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-dark border p-4 ">
-                                <h4 class="mb-4">Save The Topic Forests</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip sed eiusmod tempor.</p>
-                                <a class="btn-hover-bg btn btn-primary text-white py-2 px-4" href="#">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Blog End -->
 
 
@@ -819,99 +589,7 @@
 
 
         <!-- Footer Start -->
-        <div class="container-fluid footer bg-dark text-body py-5">
-            <div class="container py-5">
-                <div class="row g-5">
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item">
-                            <h4 class="mb-4 text-white">Newsletter</h4>
-                            <p class="mb-4">Dolor amet sit justo amet elitr clita ipsum elitr est.Lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit.</p>
-                            <div class="position-relative mx-auto">
-                                <input class="form-control border-0 bg-secondary w-100 py-3 ps-4 pe-5" type="text" placeholder="Enter your email">
-                                <button type="button" class="btn-hover-bg btn btn-primary position-absolute top-0 end-0 py-2 mt-2 me-2">SignUp</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item d-flex flex-column">
-                            <h4 class="mb-4 text-white">Our Services</h4>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Ocean Turtle</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> White Tiger</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Social Ecology</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Loneliness</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Beauty of Life</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Present for You</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item d-flex flex-column">
-                            <h4 class="mb-4 text-white">Volunteer</h4>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Karen Dawson</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Jack Simmons</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Michael Linden</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Simon Green</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Natalie Channing</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Caroline Gerwig</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item">
-                            <h4 class="mb-4 text-white">Our Gallery</h4>
-                            <div class="row g-2">
-                                <div class="col-4">
-                                    <div class="footer-gallery">
-                                        <img src="img/gallery-footer-1.jpg" class="img-fluid w-100" alt="">
-                                        <div class="footer-search-icon">
-                                            <a href="img/gallery-footer-1.jpg" data-lightbox="footerGallery-1" class="my-auto"><i class="fas fa-search-plus text-white"></i></a>
-                                        </div>
-                                    </div>
-                               </div>
-                               <div class="col-4">
-                                    <div class="footer-gallery">
-                                        <img src="img/gallery-footer-2.jpg" class="img-fluid w-100" alt="">
-                                        <div class="footer-search-icon">
-                                            <a href="img/gallery-footer-2.jpg" data-lightbox="footerGallery-2" class="my-auto"><i class="fas fa-search-plus text-white"></i></a>
-                                        </div>
-                                    </div>
-                               </div>
-                                <div class="col-4">
-                                    <div class="footer-gallery">
-                                        <img src="img/gallery-footer-3.jpg" class="img-fluid w-100" alt="">
-                                        <div class="footer-search-icon">
-                                            <a href="img/gallery-footer-3.jpg" data-lightbox="footerGallery-3" class="my-auto"><i class="fas fa-search-plus text-white"></i></a>
-                                        </div>
-                                    </div>
-                               </div>
-                                <div class="col-4">
-                                    <div class="footer-gallery">
-                                        <img src="img/gallery-footer-4.jpg" class="img-fluid w-100" alt="">
-                                        <div class="footer-search-icon">
-                                            <a href="img/gallery-footer-4.jpg" data-lightbox="footerGallery-4" class="my-auto"><i class="fas fa-search-plus text-white"></i></a>
-                                        </div>
-                                    </div>
-                               </div>
-                                <div class="col-4">
-                                    <div class="footer-gallery">
-                                        <img src="img/gallery-footer-5.jpg" class="img-fluid w-100" alt="">
-                                        <div class="footer-search-icon">
-                                            <a href="img/gallery-footer-5.jpg" data-lightbox="footerGallery-5" class="my-auto"><i class="fas fa-search-plus text-white"></i></a>
-                                        </div>
-                                    </div>
-                               </div>
-                               <div class="col-4">
-									<div class="footer-gallery">
-										<img src="img/gallery-footer-6.jpg" class="img-fluid w-100" alt="">
-                                        <div class="footer-search-icon">
-                                            <a href="img/gallery-footer-6.jpg" data-lightbox="footerGallery-6" class="my-auto"><i class="fas fa-search-plus text-white"></i></a>
-                                        </div>
-									</div>
-								</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- Footer End -->
 
 
@@ -957,8 +635,7 @@
         <script src="lib/lightbox/js/lightbox.min.js"></script>
         
 
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+
 
     </body>
 

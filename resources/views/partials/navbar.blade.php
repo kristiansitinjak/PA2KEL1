@@ -25,21 +25,12 @@
                     <div class="collapse navbar-collapse bg-light" id="navbarCollapse">
                         <div class="navbar-nav ms-auto">
                             <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
-                            <a href="about.html" class="nav-item nav-link">About</a>
-                            <a href="service.html" class="nav-item nav-link">Services</a>
+                            <a href="{{ url('/about') }}" class="nav-item nav-link">About</a>
+                            <a href="{{ url('/service') }}" class="nav-item nav-link">Services</a>
                             <a href="{{ url('/news') }}" class="nav-item nav-link">News</a>
                             <a href="{{ url('/events') }}" class="nav-item nav-link">Events</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                    <a href="blog.html" class="dropdown-item">Blog</a>
-                                    <a href="gallery.html" class="dropdown-item">Gallery</a>
-                                    <a href="volunteer.html" class="dropdown-item">Volunteers</a>
-                                    <a href="donation.html" class="dropdown-item">Donation</a>
-                                    <a href="404.html" class="dropdown-item">404 Error</a>
-                                </div>
-                            </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="{{ url('/contact') }}" class="nav-item nav-link">Contact</a>
+                            <a href="{{ url('/gallery') }}" class="nav-item nav-link">Gallery</a>
                         </div>
                         <div class="d-flex align-items-center flex-nowrap pt-xl-0" style="margin-left: 15px;">
                             <a href="" class="btn-hover-bg btn btn-primary text-white py-2 px-4 me-3">Donate Now</a>

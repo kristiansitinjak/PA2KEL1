@@ -6,10 +6,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/404', function () {
-    return view('404');
-});
-
 Route::get('/about', function () {
     return view('about');
 });
@@ -41,6 +37,14 @@ Route::get('/gallery', function () {
 Route::get('/index', function () {
     return view('index');
 });
+
+Route::get('/contact',function (){
+    return view('contact');
+});
+
+
+
+
 
 Route::get('/service', function () {
     return view('service');
@@ -74,6 +78,3 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/404', function () {
-    return view('404');
-})->name('error404');

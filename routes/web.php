@@ -44,6 +44,14 @@ Route::get('/contact',function (){
 
 
 
+Route::get('/admin', function () {
+    return view('admin.admin');
+})->name('admin');
+
+Route::get('/', function () {
+    return view('home'); 
+})->name('home');
+
 
 
 Route::get('/service', function () {

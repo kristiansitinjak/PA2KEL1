@@ -26,6 +26,9 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <!-- Glide.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
+
 </head>
 <body>
     @include('partials.navbar')
@@ -44,5 +47,24 @@
     
             <!-- Template Javascript -->
             <script src="js/main.js"></script>
-</body>
-</html>
+        <!-- Glide.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            new Glide('#glidePartners', {
+                type: 'carousel',
+                autoplay: 2000, // Ganti waktu dalam milidetik (2000 = 2 detik)
+                hoverpause: false, // Pause saat hover
+                perView: 4, // Jumlah gambar yang tampil sekaligus
+                gap: 20, // Jarak antar gambar
+                breakpoints: {
+                    1024: { perView: 3 },
+                    768: { perView: 2 },
+                    480: { perView: 1 }
+                }
+            }).mount();
+        });
+    </script>
+    
+    </body>
+    </html>

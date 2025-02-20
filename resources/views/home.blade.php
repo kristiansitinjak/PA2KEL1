@@ -26,27 +26,39 @@
                     </div>
                 </div>
 
-                <div class="container py-5 text-center">
-                    <div class="row">
-                        <div class="col-md-3 d-flex flex-column align-items-center">
-                            <div class="feature-icon mb-2">📑</div>
-                            <h5 class="fw-bold">Membangun Jaringan dan Kolaborasi</h5>
-                        </div>
-                        <div class="col-md-3 d-flex flex-column align-items-center">
-                            <div class="feature-icon mb-2">📷</div>
-                            <h5 class="fw-bold">Berbagi Pengetahuan dan Pengalaman</h5>
-                        </div>
-                        <div class="col-md-3 d-flex flex-column align-items-center">
-                            <div class="feature-icon mb-2">📦</div>
-                            <h5 class="fw-bold">Pengembangan Profesionalisme</h5>
-                        </div>
-                        <div class="col-md-3 d-flex flex-column align-items-center">
-                            <div class="feature-icon mb-2">🛡️</div>
-                            <h5 class="fw-bold">Mengembangkan Proyek Bersama</h5>
-                        </div>
+            <div class="mt-4">
+                <div class="glide" id="glidePartners">
+                    <div class="glide__track" data-glide-el="track">
+                        <ul class="glide__slides align-items-center">
+                            <li class="glide__slide">
+                                <div class="p-5">
+                                    <img src="{{ asset('img/partners (1).png') }}">
+                                </div>
+                            </li>
+                            <li class="glide__slide">
+                                <div class="p-5">
+                                    <img src="{{ asset('img/partners (2).png') }}">
+                                </div>
+                            </li>
+                            <li class="glide__slide">
+                                <div class="p-5">
+                                    <img src="{{ asset('img/partners (3).png') }}">
+                                </div>
+                            </li>
+                            <li class="glide__slide">
+                                <div class="p-5">
+                                    <img src="{{ asset('img/partners (4).png') }}">
+                                </div>
+                            </li>
+                            <li class="glide__slide">
+                                <div class="p-5">
+                                    <img src="{{ asset('img/partners (5).png') }}">
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-
+            </div>y
                 <div class="container-fluid bg-light py-5">
                     <div class="container text-center">
                         <h2 class="fw-bold">Anggota Kepengurusan Himpunan Mahasiswa Sistem Informasi</h2>

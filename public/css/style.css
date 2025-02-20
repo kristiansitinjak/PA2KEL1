@@ -14,6 +14,14 @@
  }
 /*** Spinner End ***/
 
+.glide__slide img {
+    width: 150px; /* Atur lebar gambar */
+    height: 100px; /* Atur tinggi gambar */
+    object-fit: contain; /* Menjaga aspek rasio gambar */
+    display: block;
+    margin: auto;
+}
+
 .back-to-top {
     position: fixed;
     right: 30px;

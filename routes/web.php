@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LaporanKeuanganController;
-
+use App\Http\Controllers\NewsController;
 
 
 
@@ -98,3 +98,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/keuangan', [LaporanKeuanganController::class, 'index'])->name('admin.keuangan.index');
 });
 Route::resource('keuangan', LaporanKeuanganController::class);
+
+
+
+Route::get('/keuangan', [NewsController::class, 'index'])->name('keuangan.index');
+Route::get('/keuangan/create', [NewsController::class, 'create'])->name('keuangan.create');
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/keuangan', [NewsController::class, 'index'])->name('admin.news.index');
+});
+Route::resource('news', NewsController::class);
+

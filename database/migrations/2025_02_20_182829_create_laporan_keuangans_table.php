@@ -11,20 +11,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('news', function (Blueprint $table) {
+        Schema::create('laporan_keuangan', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('content');
-            $table->string('image')->nullable();
+            $table->date('tanggal');
+            $table->string('deskripsi');
+            $table->decimal('jumlah', 15, 2);
+            $table->enum('jenis', ['pemasukan', 'pengeluaran']);
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('news');
+        Schema::dropIfExists('laporan_keuangan');
     }
 };

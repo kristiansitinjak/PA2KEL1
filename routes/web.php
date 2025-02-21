@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LaporanKeuanganController;
+
+
+
 
 Route::get('/', function () {
     return view('home');
@@ -86,3 +90,11 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+
+
+Route::get('/keuangan', [LaporanKeuanganController::class, 'index'])->name('keuangan.index');
+Route::get('/keuangan/create', [LaporanKeuanganController::class, 'create'])->name('keuangan.create');
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/keuangan', [LaporanKeuanganController::class, 'index'])->name('admin.keuangan.index');
+});
+Route::resource('keuangan', LaporanKeuanganController::class);

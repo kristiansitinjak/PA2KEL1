@@ -101,10 +101,22 @@ Route::resource('keuangan', LaporanKeuanganController::class);
 
 
 
-Route::get('/keuangan', [NewsController::class, 'index'])->name('keuangan.index');
-Route::get('/keuangan/create', [NewsController::class, 'create'])->name('keuangan.create');
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/keuangan', [NewsController::class, 'index'])->name('admin.news.index');
+    Route::get('/news', [NewsController::class, 'index'])->name('admin.news.index');
 });
+Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
 Route::resource('news', NewsController::class);
 
+
+// Route::middleware(['auth'])->prefix('admin')->group(function () {
+//     Route::resource('news', NewsController::class)->names([
+//         'index' => 'admin.news.index',
+//         'create' => 'admin.news.create',
+//         'store' => 'admin.news.store',
+//         'edit' => 'admin.news.edit',
+//         'update' => 'admin.news.update',
+//         'destroy' => 'admin.news.destroy',
+//     ]);
+// });

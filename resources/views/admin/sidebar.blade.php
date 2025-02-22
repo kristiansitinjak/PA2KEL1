@@ -56,6 +56,13 @@
     </a>
 </li>
 
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('admin.members.index') }}">
+        <i class="fas fa-fw fa-plus-square"></i>
+        <span>Manajemen Anggota</span>
+    </a>
+</li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
@@ -65,5 +72,15 @@
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 
+
+
+    <li class="text-center mt-3">
+    <a href="{{ url('/home') }}" class="btn btn-primary btn-lg" style="background-color: #007bff; color: white; border-radius: 8px; padding: 10px 20px;">
+        🏠 Kembali ke Home
+    </a>
+</li>
+
+
 </ul>
+
 <!-- End of Sidebar -->

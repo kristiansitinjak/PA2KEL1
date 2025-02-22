@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LaporanKeuanganController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\MemberController;
 
 
 
@@ -100,7 +101,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 });
 Route::resource('keuangan', LaporanKeuanganController::class);
 
-
+// route berita
 
 Route::prefix('admin')->group(function () {
     Route::resource('news', NewsController::class)->names([
@@ -112,3 +113,10 @@ Route::prefix('admin')->group(function () {
         'destroy' => 'admin.news.destroy',
     ]);
 });
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('members', MemberController::class);
+});
+
+

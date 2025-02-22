@@ -43,14 +43,14 @@
 </li>
 <!-- Nav Item - Manajemen Berita -->
 <li class="nav-item">
-    <a class="nav-link" href="{{ route('news.index') }}">
+    <a class="nav-link" href="{{ route('admin.news.index') }}">
         <i class="fas fa-fw fa-newspaper"></i>
         <span>Daftar Berita</span>
     </a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" href="{{ route('news.create') }}">
+    <a class="nav-link" href="{{ route('admin.news.create') }}">
         <i class="fas fa-fw fa-plus-square"></i>
         <span>Tambah Berita</span>
     </a>

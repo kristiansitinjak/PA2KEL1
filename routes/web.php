@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LaporanKeuanganController;
 use App\Http\Controllers\Admin\NewsController;
-use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\CategoryController;
 
 
 
@@ -115,8 +116,11 @@ Route::prefix('admin')->group(function () {
 });
 
 
+
 Route::prefix('admin')->name('admin.')->group(function () {
+    // Rute untuk kategori anggota (Category)
+    Route::resource('categories', CategoryController::class);
+
+    // Rute untuk anggota (Member)
     Route::resource('members', MemberController::class);
 });
-
-

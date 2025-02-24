@@ -3,51 +3,37 @@
 @section('content')
 <div class="container mt-4">
     <h2 class="mb-3">Edit Anggota</h2>
+    <a href="{{ route('admin.members.index') }}" class="btn btn-secondary mb-3">Kembali</a>
 
-    @if($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <form action="{{ route('admin.members.update', $member->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.members.update', $member->id) }}" method="POST">
         @csrf
         @method('PUT')
 
         <div class="mb-3">
             <label class="form-label">Nama</label>
-            <input type="text" name="name" class="form-control" value="{{ $member->name }}" required>
+            <input type="text" class="form-control" name="name" value="{{ $member->name }}" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Jabatan</label>
-            <input type="text" name="position" class="form-control" value="{{ $member->position }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">No. HP</label>
-            <input type="text" name="phone" class="form-control" value="{{ $member->phone }}">
+            <label class="form-label">Nomor Telepon</label>
+            <input type="text" class="form-control" name="phone" value="{{ $member->phone }}" required>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" value="{{ $member->email }}" required>
+            <input type="email" class="form-control" name="email" value="{{ $member->email }}" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Foto</label>
-            <input type="file" name="photo" class="form-control">
-            @if($member->photo)
-                <img src="{{ asset('storage/' . $member->photo) }}" width="100">
-            @endif
+            <label class="form-label">Kategori Jabatan</label>
+            <select class="form-control" name="category_id" required>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ $member->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                @endforeach
+            </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
-        <a href="{{ route('admin.members.index') }}" class="btn btn-secondary">Batal</a>
+        <button type="submit" class="btn btn-success">Update</button>
     </form>
 </div>
 @endsection

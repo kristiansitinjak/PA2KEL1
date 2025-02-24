@@ -9,13 +9,11 @@ class Member extends Model
 {
     use HasFactory;
 
-    protected $table = 'members'; // Nama tabel
+    protected $fillable = ['name', 'phone', 'email', 'category_id', 'photo'];
 
-    protected $fillable = [
-        'name',
-        'position',
-        'phone',
-        'email',
-        'photo',
-    ];
+    // Relasi: Member memiliki satu kategori
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

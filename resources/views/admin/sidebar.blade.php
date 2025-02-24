@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -14,55 +14,77 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="#">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+            <span>Dashboard</span>
+        </a>
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Components
-    </div>
-
-    <!-- Nav Item - Laporan Keuangan -->
+    <!-- 📌 KATEGORI: LAPORAN KEUANGAN (Dropdown) -->
     <li class="nav-item">
-    <a class="nav-link" href="{{ route('keuangan.index') }}">
-        <i class="fas fa-fw fa-file-invoice-dollar"></i>
-        <span>Daftar Laporan</span>
-    </a>
-</li>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinance"
+            aria-expanded="true" aria-controls="collapseFinance">
+            <i class="fas fa-fw fa-file-invoice-dollar"></i>
+            <span>Laporan Keuangan</span>
+        </a>
+        <div id="collapseFinance" class="collapse" aria-labelledby="headingFinance" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('keuangan.index') }}">
+                    <i class="fas fa-list"></i> Daftar Laporan
+                </a>
+                <a class="collapse-item" href="{{ route('keuangan.create') }}">
+                    <i class="fas fa-plus-circle"></i> Tambah Laporan
+                </a>
+            </div>
+        </div>
+    </li>
 
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('keuangan.create') }}">
-        <i class="fas fa-fw fa-plus-circle"></i>
-        <span>Tambah Laporan</span>
-    </a>
-</li>
-<!-- Nav Item - Manajemen Berita -->
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('admin.news.index') }}">
-        <i class="fas fa-fw fa-newspaper"></i>
-        <span>Daftar Berita</span>
-    </a>
-</li>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('admin.news.create') }}">
-        <i class="fas fa-fw fa-plus-square"></i>
-        <span>Tambah Berita</span>
-    </a>
-</li>
+    <!-- 📌 KATEGORI: MANAJEMEN BERITA (Dropdown) -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNews"
+            aria-expanded="true" aria-controls="collapseNews">
+            <i class="fas fa-fw fa-newspaper"></i>
+            <span>Manajemen Berita</span>
+        </a>
+        <div id="collapseNews" class="collapse" aria-labelledby="headingNews" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('admin.news.index') }}">
+                    <i class="fas fa-list"></i> Daftar Berita
+                </a>
+                <a class="collapse-item" href="{{ route('admin.news.create') }}">
+                    <i class="fas fa-plus-square"></i> Tambah Berita
+                </a>
+            </div>
+        </div>
+    </li>
 
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('admin.members.index') }}">
-        <i class="fas fa-fw fa-plus-square"></i>
-        <span>Manajemen Anggota</span>
-    </a>
-</li>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 
+    <!-- 📌 KATEGORI: MANAJEMEN ANGGOTA (Dropdown) -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMembers"
+            aria-expanded="true" aria-controls="collapseMembers">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Manajemen Anggota</span>
+        </a>
+        <div id="collapseMembers" class="collapse" aria-labelledby="headingMembers" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('admin.members.index') }}">
+                    <i class="fas fa-list"></i> Daftar Anggota
+                </a>
+                <a class="collapse-item" href="{{ route('admin.categories.index') }}">
+                    <i class="fas fa-tags"></i> Kategori Anggota
+                </a>
+            </div>
+        </div>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
@@ -72,15 +94,12 @@
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 
-
-
+    <!-- 📌 KEMBALI KE HOME -->
     <li class="text-center mt-3">
-    <a href="{{ url('/home') }}" class="btn btn-primary btn-lg" style="background-color: #007bff; color: white; border-radius: 8px; padding: 10px 20px;">
-        🏠 Kembali ke Home
-    </a>
-</li>
-
+        <a href="{{ url('/home') }}" class="btn btn-primary btn-lg" style="background-color: #007bff; color: white; border-radius: 8px; padding: 10px 20px;">
+            🏠 Kembali ke Home
+        </a>
+    </li>
 
 </ul>
-
 <!-- End of Sidebar -->

@@ -9,34 +9,44 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nama</th>
-                <th>Jabatan</th>
-                <th>No. HP</th>
-                <th>Email</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($members as $member)
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nama</th>
+                    <th>Telepon</th>
+                    <th>Email</th>
+                    <th>Kategori</th>
+                    <th>Foto</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($members as $member)
                 <tr>
                     <td>{{ $member->name }}</td>
-                    <td>{{ $member->category->name }}</td>
                     <td>{{ $member->phone }}</td>
                     <td>{{ $member->email }}</td>
+                    <td>{{ $member->category->name }}</td>
                     <td>
-                        <a href="{{ route('admin.members.edit', $member->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{ route('admin.members.destroy', $member->id) }}" method="POST" style="display:inline;">
+                        @if($member->photo)
+                            <img src="{{ asset('storage/' . $member->photo) }}" class="img-thumbnail" width="70">
+                        @else
+                            <span class="text-muted">Tidak ada foto</span>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{{ route('admin.members.edit', $member->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('admin.members.destroy', $member->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hapus anggota ini?')">Hapus</button>
                         </form>
                     </td>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection

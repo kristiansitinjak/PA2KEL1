@@ -3,37 +3,36 @@
 @section('content')
 <div class="container mt-4">
     <h2 class="mb-3">Edit Anggota</h2>
-    <a href="{{ route('admin.members.index') }}" class="btn btn-secondary mb-3">Kembali</a>
-
-    <form action="{{ route('admin.members.update', $member->id) }}" method="POST">
+    <a href="{{ route('admin.members.edit', $member->id) }}">Edit</a>
+    <form action="{{ route('admin.members.destroy', $member->id) }}" method="POST">
         @csrf
         @method('PUT')
 
-        <div class="mb-3">
-            <label class="form-label">Nama</label>
-            <input type="text" class="form-control" name="name" value="{{ $member->name }}" required>
-        </div>
+        <label>Nama:</label>
+        <input type="text" name="name" value="{{ $member->name }}" required>
 
-        <div class="mb-3">
-            <label class="form-label">Nomor Telepon</label>
-            <input type="text" class="form-control" name="phone" value="{{ $member->phone }}" required>
-        </div>
+        <label>Nomor Telepon:</label>
+        <input type="text" name="phone" value="{{ $member->phone }}" required>
 
-        <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" class="form-control" name="email" value="{{ $member->email }}" required>
-        </div>
+        <label>Email:</label>
+        <input type="email" name="email" value="{{ $member->email }}" required>
 
-        <div class="mb-3">
-            <label class="form-label">Kategori Jabatan</label>
-            <select class="form-control" name="category_id" required>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ $member->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
+        <label>Kategori:</label>
+        <select name="category_id" required>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ $member->category_id == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
 
-        <button type="submit" class="btn btn-success">Update</button>
+        <label>Foto:</label>
+        @if($member->photo)
+            <img src="{{ asset('storage/' . $member->photo) }}" width="100">
+        @endif
+        <input type="file" name="photo" accept="image/*">
+
+        <button type="submit">Update</button>
     </form>
 </div>
 @endsection

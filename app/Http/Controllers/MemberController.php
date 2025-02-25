@@ -23,14 +23,28 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'phone' => 'required|unique:members,phone',
-            'email' => 'required|email|unique:members,email',
-            'category_id' => 'required|exists:categories,id'
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:15|unique:members',
+            'email' => 'required|email|max:255|unique:members',
+            'category_id' => 'required|exists:categories,id',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        Member::create($request->all());
-        return redirect()->route('admin.members.index')->with('success', 'Anggota berhasil ditambahkan');
+        // Simpan foto jika diunggah
+        $photoPath = null;
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos/members', 'public');
+        }
+
+        Member::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'category_id' => $request->category_id,
+            'photo' => $photoPath,
+        ]);
+
+        return redirect()->route('admin.members.index')->with('success', 'Anggota berhasil ditambahkan!');
     }
 
     public function edit(Member $member)
@@ -42,19 +56,29 @@ class MemberController extends Controller
     public function update(Request $request, Member $member)
     {
         $request->validate([
-            'name' => 'required',
-            'phone' => 'required|unique:members,phone,' . $member->id,
-            'email' => 'required|email|unique:members,email,' . $member->id,
-            'category_id' => 'required|exists:categories,id'
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:15|unique:members,phone,'.$member->id,
+            'email' => 'required|email|max:255|unique:members,email,'.$member->id,
+            'category_id' => 'required|exists:categories,id',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
-
-        $member->update($request->all());
-        return redirect()->route('admin.members.index')->with('success', 'Data anggota diperbarui');
-    }
-
-    public function destroy(Member $member)
-    {
-        $member->delete();
-        return redirect()->route('admin.members.index')->with('success', 'Anggota berhasil dihapus');
+    
+        if ($request->hasFile('photo')) {
+            if ($member->photo) {
+                Storage::disk('public')->delete($member->photo);
+            }
+            $photoPath = $request->file('photo')->store('photos/members', 'public');
+            $member->photo = $photoPath;
+        }
+    
+        $member->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'category_id' => $request->category_id,
+            'photo' => $member->photo,
+        ]);
+    
+        return redirect()->route('admin.members.index')->with('success', 'Anggota berhasil diperbarui!');
     }
 }

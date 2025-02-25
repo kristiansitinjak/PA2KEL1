@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->string('phone')->unique();
             $table->string('email')->unique();
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->string('photo')->nullable(); // Tambahkan kolom photo
             $table->timestamps();
         });
     }

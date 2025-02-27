@@ -14,6 +14,7 @@ class Category extends Model
     // Relasi: Kategori bisa memiliki banyak anggota
     public function members()
     {
-        return $this->hasMany(Member::class);
+        return $this->hasMany(Member::class, 'category_id');
     }
+    
 }

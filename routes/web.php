@@ -5,6 +5,8 @@ use App\Http\Controllers\LaporanKeuanganController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\StrukturController;
+use App\Http\Controllers\StructureController;
 
 
 
@@ -124,3 +126,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Rute untuk anggota (Member)
     Route::resource('members', MemberController::class);
 });
+
+// pengurus
+// Route::get('/struktur', [StrukturController::class, 'index']);
+Route::get('/admin/members', [MemberController::class, 'index'])->name('admin.members.index');
+Route::get('/struktur', [StrukturController::class, 'index'])->name('struktur.index');
+
+

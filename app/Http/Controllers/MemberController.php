@@ -81,4 +81,14 @@ class MemberController extends Controller
     
         return redirect()->route('admin.members.index')->with('success', 'Anggota berhasil diperbarui!');
     }
+
+    public function destroy($id)
+    {
+        $member = Member::findOrFail($id);
+        $member->delete();
+    
+        return redirect()->route('admin.members.index')->with('success', 'Anggota berhasil dihapus');
+    }
+    
+
 }

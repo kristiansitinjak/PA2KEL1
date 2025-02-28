@@ -14,6 +14,11 @@
         </div>
 
         <div class="mb-3">
+            <label class="form-label">Jabatan:</label>
+            <input type="text" name="jabatan" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
             <label class="form-label">Nomor Telepon:</label>
             <input type="text" name="phone" class="form-control" required>
         </div>

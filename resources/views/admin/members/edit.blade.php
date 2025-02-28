@@ -11,6 +11,9 @@
         <label>Nama:</label>
         <input type="text" name="name" value="{{ $member->name }}" required>
 
+        <label>Nama:</label>
+        <input type="text" name="jabatan" value="{{ $member->jabatan }}" required>
+
         <label>Nomor Telepon:</label>
         <input type="text" name="phone" value="{{ $member->phone }}" required>
 

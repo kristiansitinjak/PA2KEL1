@@ -5,19 +5,40 @@
     <h1 class="mb-5">Struktur Organisasi {{ $category->name }}</h1>
 
     @if ($category->members->count() > 0)
-        <div class="org-chart">
-            @foreach ($category->members as $member)
-                <div class="member-card">
-                    <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" class="member-photo">
-                    <h5 class="mt-2 fw-bold">{{ $member->name }}</h5>
-                    <p class="text-muted">{{ $member->position }}</p>
-                    <p>📧 {{ $member->email }}</p>
-                    <p>📞 {{ $member->phone }}</p>
-                </div>
-            @endforeach
-        </div>
+        @php
+            $rows = [2, 3, 5, 7]; // Pola piramida (2,3,5,7)
+            $index = 0;
+            $totalMembers = $category->members->count();
+            $members = $category->members;
+        @endphp
+
+        @foreach ($rows as $row)
+            @if ($index >= $totalMembers) @break @endif
+            <div class="pyramid-row">
+                @for ($i = 0; $i < $row && $index < $totalMembers; $i++, $index++)
+                    <div class="member-card">
+                        <div class="card-body">
+                            <img src="{{ asset('storage/' . $members[$index]->photo) }}" 
+                                 alt="{{ $members[$index]->name }}" 
+                                 class="member-photo">
+
+                            <h5 class="fw-bold mt-3">{{ $members[$index]->name }}</h5>
+                            <h4 class="text-primary fw-bold">{{ $members[$index]->jabatan }}</h4>
+
+                            <p class="text-muted small">
+                                <i class="fas fa-envelope"></i> {{ $members[$index]->email }} <br>
+                                <i class="fas fa-phone"></i> {{ $members[$index]->phone }}
+                            </p>
+                        </div>
+                    </div>
+                @endfor
+            </div>
+        @endforeach
     @else
         <p class="text-muted">Belum ada anggota di kategori ini.</p>
     @endif
 </div>
+
+{{-- Link ke file CSS eksternal --}}
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 @endsection

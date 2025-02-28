@@ -24,6 +24,7 @@ class MemberController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'jabatan' => 'required|string|max:255',
             'phone' => 'required|string|max:15|unique:members',
             'email' => 'required|email|max:255|unique:members',
             'category_id' => 'required|exists:categories,id',
@@ -38,6 +39,7 @@ class MemberController extends Controller
 
         Member::create([
             'name' => $request->name,
+            'jabatan' => $request->jabatan,
             'phone' => $request->phone,
             'email' => $request->email,
             'category_id' => $request->category_id,
@@ -57,6 +59,7 @@ class MemberController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'jabatan' => 'required|string|max:255',
             'phone' => 'required|string|max:15|unique:members,phone,'.$member->id,
             'email' => 'required|email|max:255|unique:members,email,'.$member->id,
             'category_id' => 'required|exists:categories,id',
@@ -73,6 +76,7 @@ class MemberController extends Controller
     
         $member->update([
             'name' => $request->name,
+            'jabatan' => $request->jabatan,
             'phone' => $request->phone,
             'email' => $request->email,
             'category_id' => $request->category_id,

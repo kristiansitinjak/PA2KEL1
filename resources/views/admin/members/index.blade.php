@@ -14,6 +14,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th>Nama</th>
+                    <th>Jabatan</th>
                     <th>Telepon</th>
                     <th>Email</th>
                     <th>Kategori</th>
@@ -25,6 +26,7 @@
                 @foreach($members as $member)
                 <tr>
                     <td>{{ $member->name }}</td>
+                    <td>{{ $member->jabatan }}</td>
                     <td>{{ $member->phone }}</td>
                     <td>{{ $member->email }}</td>
                     <td>{{ $member->category->name }}</td>

@@ -23,11 +23,11 @@
             </button>
             <div class="collapse navbar-collapse bg-light" id="navbarCollapse">
                 <div class="navbar-nav ms-auto">
-                    <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
-                    <a href="{{ url('/about') }}" class="nav-item nav-link">About</a>
-                    <a href="{{ url('/news') }}" class="nav-item nav-link">News</a>
-                    <a href="{{ url('/events') }}" class="nav-item nav-link">Events</a>
-                    <a href="{{ url('/gallery') }}" class="nav-item nav-link">Gallery</a>
+                    <a href="{{ url('/') }}" class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a>
+                    <a href="{{ url('/about') }}" class="nav-item nav-link {{ request()->is('about') ? 'active' : '' }}">About</a>
+                    <a href="{{ url('/news') }}" class="nav-item nav-link {{ request()->is('news') ? 'active' : '' }}">News</a>
+                    <a href="{{ url('/events') }}" class="nav-item nav-link {{ request()->is('events') ? 'active' : '' }}">Events</a>
+                    <a href="{{ url('/gallery') }}" class="nav-item nav-link {{ request()->is('gallery') ? 'active' : '' }}">Gallery</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Struktur</a>
                         <div class="dropdown-menu m-0 bg-secondary rounded-0">

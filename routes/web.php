@@ -118,6 +118,13 @@ Route::prefix('admin')->group(function () {
 });
 
 
+Route::get('/news', [NewsController::class, 'indexPublic'])->name('news.index');
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
+Route::get('/news', [NewsController::class, 'indexPublic'])->name('news.public');
+Route::get('/news/{news}', [NewsController::class, 'show'])->name('news.show');
+
+
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
     // Rute untuk kategori anggota (Category)
@@ -126,6 +133,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Rute untuk anggota (Member)
     Route::resource('members', MemberController::class);
 });
+Route::get('/news', [NewsController::class, 'indexPublic'])->name('news.public');
 
 // pengurus
 // Route::get('/struktur', [StrukturController::class, 'index']);

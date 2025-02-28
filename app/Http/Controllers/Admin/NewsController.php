@@ -13,6 +13,19 @@ class NewsController extends Controller {
         return view('admin.news.index', compact('news'));
     }
 
+    // Menampilkan berita di halaman publik
+    public function indexPublic()
+    {
+        $news = News::latest()->get(); // Mengambil semua berita terbaru
+        return view('news', compact('news')); // Kirim ke tampilan views/news/index.blade.php
+    }
+
+    // Menampilkan halaman detail berita
+    public function show($id) {
+        $news = News::findOrFail($id);
+        return view('news_detail', compact('news')); // Kirim ke tampilan views/news/show.blade.php
+    }
+
     public function create() {
         return view('admin.news.create');
     }

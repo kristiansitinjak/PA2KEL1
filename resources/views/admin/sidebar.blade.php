@@ -23,7 +23,7 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- 📌 KATEGORI: LAPORAN KEUANGAN (Dropdown) -->
+    <!-- 📌 KATEGORI: LAPORAN KEUANGAN -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinance"
             aria-expanded="true" aria-controls="collapseFinance">
@@ -45,7 +45,7 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- 📌 KATEGORI: MANAJEMEN BERITA (Dropdown) -->
+    <!-- 📌 KATEGORI: MANAJEMEN BERITA -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNews"
             aria-expanded="true" aria-controls="collapseNews">
@@ -67,7 +67,7 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- 📌 KATEGORI: MANAJEMEN ANGGOTA (Dropdown) -->
+    <!-- 📌 KATEGORI: MANAJEMEN ANGGOTA -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMembers"
             aria-expanded="true" aria-controls="collapseMembers">
@@ -81,6 +81,28 @@
                 </a>
                 <a class="collapse-item" href="{{ route('admin.categories.index') }}">
                     <i class="fas fa-tags"></i> Kategori Anggota
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- 📌 KATEGORI: MANAJEMEN MAHASISWA (DROPDOWN DENGAN TAMBAHAN "TAMBAH MAHASISWA") -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMahasiswa"
+            aria-expanded="true" aria-controls="collapseMahasiswa">
+            <i class="fas fa-fw fa-user-graduate"></i>
+            <span>Manajemen Mahasiswa</span>
+        </a>
+        <div id="collapseMahasiswa" class="collapse" aria-labelledby="headingMahasiswa" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('admin.mahasiswa.index') }}">
+                    <i class="fas fa-list"></i> Daftar Mahasiswa
+                </a>
+                <a class="collapse-item" href="{{ route('admin.mahasiswa.create') }}">
+                    <i class="fas fa-user-plus"></i> Tambah Mahasiswa
                 </a>
             </div>
         </div>

@@ -112,12 +112,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/mahasiswa/{mahasiswa}/edit', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
     Route::put('/mahasiswa/{mahasiswa}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
     Route::delete('/mahasiswa/{mahasiswa}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
-    Route::patch('/mahasiswa/{mahasiswa}/pembayaran', [MahasiswaController::class, 'updateStatusPembayaran'])->name('mahasiswa.updateStatusPembayaran');
+
+    // ✅ Perbaikan rute updateStatus (gunakan POST, tanpa "/admin" di dalam URL)
+    Route::post('/mahasiswa/update-status', [MahasiswaController::class, 'updateStatus'])
+        ->name('mahasiswa.updateStatus');
+
+    // Kirim data ke Admin 2
+    Route::patch('/mahasiswa/{id}/kirim', [MahasiswaController::class, 'kirimKeAdmin2'])->name('mahasiswa.kirim');
 });
 
+// ============================
 // ADMIN 2 - Verifikasi Mahasiswa
+// ============================
+
 Route::prefix('admin2')->name('admin2.')->group(function () {
-    Route::get('/mahasiswa', [MahasiswaController::class, 'verifikasi'])->name('mahasiswa.index'); // <- Ubah methodnya ke verifikasi
+    Route::get('/mahasiswa/verifikasi', [MahasiswaController::class, 'verifikasi'])->name('mahasiswa.index');
     Route::patch('/mahasiswa/{mahasiswa}/approve', [MahasiswaController::class, 'approve'])->name('mahasiswa.approve');
     Route::patch('/mahasiswa/{mahasiswa}/reject', [MahasiswaController::class, 'reject'])->name('mahasiswa.reject');
 });

@@ -1,44 +1,41 @@
 @extends('admin.admin')
 
 @section('content')
+<div class="container mt-4">
     <h2>Manajemen Mahasiswa</h2>
-    <a href="{{ route('admin.mahasiswa.create') }}">Tambah Mahasiswa</a>
-    <table>
-        <thead>
-            <tr>
-                <th>Nama</th>
-                <th>NIM</th>
-                <th>Kelas</th>
-                <th>Angkatan</th>
-                <th>Status Pembayaran</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($mahasiswas as $mahasiswa)
+    <a href="{{ route('admin.mahasiswa.create') }}" class="btn btn-primary mb-3">Tambah Mahasiswa</a>
+
+    <!-- ✅ Perbaikan pada form: gunakan method PATCH -->
+    <form action="{{ route('admin.mahasiswa.updateStatus') }}" method="POST">
+        @csrf
+        @method('PATCH') <!-- ✅ Menyesuaikan metode dengan route di web.php -->
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>NIM</th>
+                    <th>Kelas</th> <!-- ✅ Tambah Kelas -->
+                    <th>Angkatan</th> <!-- ✅ Tambah Angkatan -->
+                    <th>Status Pembayaran</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($mahasiswas as $mahasiswa)
                 <tr>
                     <td>{{ $mahasiswa->nama }}</td>
                     <td>{{ $mahasiswa->nim }}</td>
-                    <td>{{ $mahasiswa->kelas }}</td>
-                    <td>{{ $mahasiswa->angkatan }}</td>
+                    <td>{{ $mahasiswa->kelas }}</td> <!-- ✅ Menampilkan Kelas -->
+                    <td>{{ $mahasiswa->angkatan }}</td> <!-- ✅ Menampilkan Angkatan -->
                     <td>
-                        <form action="{{ route('admin.mahasiswa.update', $mahasiswa->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <input type="checkbox" name="status_pembayaran" 
-                                onchange="this.form.submit()" {{ $mahasiswa->status_pembayaran ? 'checked' : '' }}>
-                        </form>
-                    </td>
-                    <td>
-                        <a href="{{ route('admin.mahasiswa.edit', $mahasiswa->id) }}">Edit</a>
-                        <form action="{{ route('admin.mahasiswa.destroy', $mahasiswa->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Hapus</button>
-                        </form>
+                        <input type="checkbox" name="status_pembayaran[{{ $mahasiswa->id }}]" value="1"
+                        {{ $mahasiswa->status_pembayaran ? 'checked' : '' }}>
                     </td>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+                @endforeach
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-success mt-3">Update Status</button>
+    </form>
+</div>
 @endsection

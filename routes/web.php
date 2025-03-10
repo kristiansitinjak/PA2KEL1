@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StrukturController;
 use App\Http\Controllers\StructureController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\SpreadsheetController;
 
 
 // ============================
@@ -120,5 +121,9 @@ Route::prefix('admin2')->name('admin2.')->group(function () {
     Route::patch('/mahasiswa/{mahasiswa}/approve', [MahasiswaController::class, 'approve'])->name('mahasiswa.approve');
     Route::patch('/mahasiswa/{mahasiswa}/reject', [MahasiswaController::class, 'reject'])->name('mahasiswa.reject');
 });
+
+// spreadset
+Route::get('/spreadsheet',
+[SpreadsheetController::class, 'index'])->name('spreadsheet.index');
 
 

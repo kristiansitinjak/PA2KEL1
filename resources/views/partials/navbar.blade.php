@@ -24,6 +24,7 @@
             <div class="collapse navbar-collapse bg-light" id="navbarCollapse">
                 <div class="navbar-nav ms-auto">
                     <a href="{{ url('/') }}" class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a>
+                    <a href="{{ url('/spreadsheet') }}" class="nav-item nav-link {{ request()->is('spreadsheet.index') ? 'active' : '' }}">keuangan</a>
                     <a href="{{ url('/about') }}" class="nav-item nav-link {{ request()->is('about') ? 'active' : '' }}">About</a>
                     <a href="{{ url('/news') }}" class="nav-item nav-link {{ request()->is('news') ? 'active' : '' }}">News</a>
                     <a href="{{ url('/events') }}" class="nav-item nav-link {{ request()->is('events') ? 'active' : '' }}">Events</a>

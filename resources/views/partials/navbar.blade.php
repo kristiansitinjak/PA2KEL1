@@ -16,7 +16,7 @@
         </div>
         <nav class="navbar navbar-light bg-light navbar-expand-xl">
             <a href="{{ url('/') }}" class="navbar-brand ms-3">
-                <h1 class="text-primary display-5">HIMATIF</h1>
+            <img src="{{ asset('img/himatif_institut_teknologi_del_logo.jpeg') }}" alt="Logo HIMATIF" height="50">
             </a>
             <button class="navbar-toggler py-2 px-3 me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars text-primary"></span>
@@ -24,9 +24,7 @@
             <div class="collapse navbar-collapse bg-light" id="navbarCollapse">
                 <div class="navbar-nav ms-auto">
                     <a href="{{ url('/') }}" class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a>
-                    <a href="{{ url('/spreadsheet') }}" class="nav-item nav-link {{ request()->is('spreadsheet.index') ? 'active' : '' }}">keuangan</a>
-                    <li class="nav-item">
-                    <a class="nav-link" href="{{ route('transparansi') }}"><i class="fas fa-chart-line"></i><span>Transparansi Keuangan</span></a></li>
+                    <a class="nav-link" href="{{ route('transparansi') }}"><i class="fas fa-chart-line"></i><span></span></a></li>
                     <a href="{{ url('/about') }}" class="nav-item nav-link {{ request()->is('about') ? 'active' : '' }}">About</a>
                     <a href="{{ url('/news') }}" class="nav-item nav-link {{ request()->is('news') ? 'active' : '' }}">News</a>
                     <a href="{{ url('/events') }}" class="nav-item nav-link {{ request()->is('events') ? 'active' : '' }}">Events</a>

@@ -3,8 +3,9 @@
 @section('title', 'Gallery')
 
 @section('content')
-        <!-- Gallery Start -->
-        <div class="container-fluid gallery py-5 my-5 px-0">
+        
+        <div class="container-fluid gallery py-5 my-5 px-0" >
+        <div class="container py-5">
             <div class="text-center mx-auto pb-5" style="max-width: 800px;">
                 <h5 class="text-uppercase text-primary">Our work</h5>
                 <h1 class="mb-4">We consider environment welfare</h1>

@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container-fluid donation py-5">
+<div class="container-fluid donation py-5 ">
             <div class="container py-5">
                 <div class="text-center mx-auto pb-5" style="max-width: 800px;">
                     <h5 class="text-uppercase text-primary">Donation</h5>

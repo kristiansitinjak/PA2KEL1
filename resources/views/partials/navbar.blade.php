@@ -25,6 +25,8 @@
                 <div class="navbar-nav ms-auto">
                     <a href="{{ url('/') }}" class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a>
                     <a href="{{ url('/spreadsheet') }}" class="nav-item nav-link {{ request()->is('spreadsheet.index') ? 'active' : '' }}">keuangan</a>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{ route('transparansi') }}"><i class="fas fa-chart-line"></i><span>Transparansi Keuangan</span></a></li>
                     <a href="{{ url('/about') }}" class="nav-item nav-link {{ request()->is('about') ? 'active' : '' }}">About</a>
                     <a href="{{ url('/news') }}" class="nav-item nav-link {{ request()->is('news') ? 'active' : '' }}">News</a>
                     <a href="{{ url('/events') }}" class="nav-item nav-link {{ request()->is('events') ? 'active' : '' }}">Events</a>

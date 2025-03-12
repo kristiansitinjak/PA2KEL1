@@ -9,6 +9,8 @@ use App\Http\Controllers\StrukturController;
 use App\Http\Controllers\StructureController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\SpreadsheetController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\FinancialController;
 
 
 // ============================
@@ -136,3 +138,13 @@ Route::get('/spreadsheet',
 [SpreadsheetController::class, 'index'])->name('spreadsheet.index');
 
 
+Route::get('/admin/payments', [PaymentController::class, 'index'])->name('admin.payments.index');
+Route::post('/admin/payments', [PaymentController::class, 'store'])->name('admin.payments.store');
+Route::get('/admin/pembayaran', [PaymentController::class, 'index'])->name('admin.payments.index');
+
+
+Route::get('/admin/keuangan', [FinancialController::class, 'index'])->name('admin.financial.index');
+Route::get('/admin/keuangan/create', [FinancialController::class, 'create'])->name('admin.financial.create');
+Route::post('/admin/keuangan', [FinancialController::class, 'store'])->name('admin.financial.store');
+
+Route::get('/transparansi-keuangan', [App\Http\Controllers\FinancialController::class, 'userIndex'])->name('transparansi');

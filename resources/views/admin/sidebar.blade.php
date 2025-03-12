@@ -23,6 +23,41 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
+    <!-- 📌 KATEGORI: STATUS PEMBAYARAN MAHASISWA -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePayments"
+        aria-expanded="true" aria-controls="collapsePayments">
+        <i class="fas fa-fw fa-money-check-alt"></i>
+        <span>Status Pembayaran</span>
+    </a>
+    <div id="collapsePayments" class="collapse" aria-labelledby="headingPayments" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{ route('admin.payments.index') }}">
+                <i class="fas fa-list"></i> Daftar Pembayaran
+            </a>
+        </div>
+    </div>
+</li>
+
+<!-- 📌 KATEGORI: FINANCIAL RECORD -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinancial"
+        aria-expanded="true" aria-controls="collapseFinancial">
+        <i class="fas fa-fw fa-coins"></i>
+        <span>Financial Record</span>
+    </a>
+    <div id="collapseFinancial" class="collapse" aria-labelledby="headingFinancial" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{ route('admin.financial.index') }}">
+                <i class="fas fa-list"></i> Lihat Data Keuangan
+            </a>
+            <a class="collapse-item" href="{{ route('admin.financial.create') }}">
+                <i class="fas fa-plus-circle"></i> Tambah Pemasukan/Pengeluaran
+            </a>
+        </div>
+    </div>
+</li>
+
     <!-- 📌 KATEGORI: LAPORAN KEUANGAN -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinance"

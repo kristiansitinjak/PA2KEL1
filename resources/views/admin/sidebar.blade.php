@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">HIMATIF <sup></sup></div>
     </a>
 
     <!-- Divider -->
@@ -57,25 +57,6 @@
         </div>
     </div>
 </li>
-
-    <!-- 📌 KATEGORI: LAPORAN KEUANGAN -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinance"
-            aria-expanded="true" aria-controls="collapseFinance">
-            <i class="fas fa-fw fa-file-invoice-dollar"></i>
-            <span>Laporan Keuangan</span>
-        </a>
-        <div id="collapseFinance" class="collapse" aria-labelledby="headingFinance" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('keuangan.index') }}">
-                    <i class="fas fa-list"></i> Daftar Laporan
-                </a>
-                <a class="collapse-item" href="{{ route('keuangan.create') }}">
-                    <i class="fas fa-plus-circle"></i> Tambah Laporan
-                </a>
-            </div>
-        </div>
-    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">

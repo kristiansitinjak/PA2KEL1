@@ -11,123 +11,116 @@
     @endif
 
     <div class="row">
+        <!-- Tabel Pemasukan -->
         <div class="col-md-6">
-            <div class="card p-3 mb-4">
+            <div class="card p-4 shadow-sm">
                 <h5 class="mb-3">Rincian Pemasukan</h5>
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Tanggal</th>
-                            <th>Keterangan</th>
-                            <th>Jumlah</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php $totalPemasukan = 0; @endphp
-                        @foreach($records->where('jenis', 'Pemasukan') as $record)
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped text-center">
+                        <thead class="bg-primary text-white">
                             <tr>
-                                <td>{{ $record->tanggal }}</td>
-                                <td>{{ $record->keterangan }}</td>
-                                <td>Rp {{ number_format($record->jumlah, 0, ',', '.') }}</td>
+                                <th>Tanggal</th>
+                                <th>Keterangan</th>
+                                <th>Jumlah</th>
+                                <th>Aksi</th>
                             </tr>
-                            @php $totalPemasukan += $record->jumlah; @endphp
-                        @endforeach
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="2">Total Pemasukan</th>
-                            <th>Rp {{ number_format($totalPemasukan, 0, ',', '.') }}</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="card p-3 mb-4">
-                <h5 class="mb-3">Rincian Pengeluaran</h5>
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Tanggal</th>
-                            <th>Keterangan</th>
-                            <th>Jumlah</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php $totalPengeluaran = 0; @endphp
-                        @foreach($records->where('jenis', 'Pengeluaran') as $record)
-                            <tr>
-                                <td>{{ $record->tanggal }}</td>
-                                <td>{{ $record->keterangan }}</td>
-                                <td>Rp {{ number_format($record->jumlah, 0, ',', '.') }}</td>
+                        </thead>
+                        <tbody>
+                            @php $totalPemasukan = 0; @endphp
+                            @foreach($records->where('jenis', 'Pemasukan') as $record)
+                                <tr>
+                                    <td>{{ $record->tanggal }}</td>
+                                    <td>{{ $record->keterangan }}</td>
+                                    <td>Rp {{ number_format($record->jumlah, 0, ',', '.') }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.financial.edit', $record->id) }}" class="btn btn-warning btn-sm">
+                                            <i class="fa fa-pencil-alt"></i>
+                                        </a>
+                                        <form action="{{ route('admin.financial.destroy', $record->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @php $totalPemasukan += $record->jumlah; @endphp
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr class="bg-light">
+                                <th colspan="2">Total Pemasukan</th>
+                                <th>Rp {{ number_format($totalPemasukan, 0, ',', '.') }}</th>
+                                <th></th>
                             </tr>
-                            @php $totalPengeluaran += $record->jumlah; @endphp
-                        @endforeach
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="2">Total Pengeluaran</th>
-                            <th>Rp {{ number_format($totalPengeluaran, 0, ',', '.') }}</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-
-        <div class="col-md-12">
-            <div class="card p-3 mb-4">
-                <h5 class="mb-3">Saldo Akhir</h5>
-                <div class="alert alert-info">
-                    <strong>Saldo Akhir:</strong> Rp {{ number_format($totalPemasukan - $totalPengeluaran, 0, ',', '.') }}
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-12">
-            <div class="card p-3 mb-4">
-                <h5 class="mb-3">Grafik Keuangan</h5>
-                <canvas id="financialChart"></canvas>
+        <!-- Tabel Pengeluaran -->
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm">
+                <h5 class="mb-3">Rincian Pengeluaran</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped text-center">
+                        <thead class="bg-danger text-white">
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Keterangan</th>
+                                <th>Jumlah</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php $totalPengeluaran = 0; @endphp
+                            @foreach($records->where('jenis', 'Pengeluaran') as $record)
+                                <tr>
+                                    <td>{{ $record->tanggal }}</td>
+                                    <td>{{ $record->keterangan }}</td>
+                                    <td>Rp {{ number_format($record->jumlah, 0, ',', '.') }}</td>
+                                    <td>
+                                        <button class="btn btn-info btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                        <a href="{{ route('admin.financial.edit', $record->id) }}" class="btn btn-warning btn-sm">
+                                            <i class="fa fa-pencil-alt"></i>
+                                        </a>
+                                        <form action="{{ route('admin.financial.destroy', $record->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @php $totalPengeluaran += $record->jumlah; @endphp
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr class="bg-light">
+                                <th colspan="2">Total Pengeluaran</th>
+                                <th>Rp {{ number_format($totalPengeluaran, 0, ',', '.') }}</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Saldo Akhir -->
+    <div class="col-md-12 mt-4">
+        <div class="card p-4 shadow-sm text-center">
+            <h5>Saldo Akhir</h5>
+            <div class="alert alert-info">
+                <strong>Rp {{ number_format($totalPemasukan - $totalPengeluaran, 0, ',', '.') }}</strong>
             </div>
         </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    const ctx = document.getElementById('financialChart').getContext('2d');
-    const financialChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Pemasukan', 'Pengeluaran', 'Saldo Akhir'],
-            datasets: [{
-                label: 'Jumlah (Rp)',
-                data: [{{ $totalPemasukan }}, {{ $totalPengeluaran }}, {{ $totalPemasukan - $totalPengeluaran }}],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.7)',
-                    'rgba(255, 99, 132, 0.7)',
-                    'rgba(75, 192, 192, 0.7)'
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(75, 192, 192, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(value) {
-                            return 'Rp ' + value.toLocaleString('id-ID');
-                        }
-                    }
-                }
-            }
-        }
-    });
-</script>
 @endsection

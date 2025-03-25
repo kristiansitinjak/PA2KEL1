@@ -141,10 +141,14 @@ Route::get('/spreadsheet',
 Route::get('/admin/payments', [PaymentController::class, 'index'])->name('admin.payments.index');
 Route::post('/admin/payments', [PaymentController::class, 'store'])->name('admin.payments.store');
 Route::get('/admin/pembayaran', [PaymentController::class, 'index'])->name('admin.payments.index');
+Route::post('/admin/payments/import', [PaymentController::class, 'importFromSheet'])->name('payments.import');
 
 
 Route::get('/admin/keuangan', [FinancialController::class, 'index'])->name('admin.financial.index');
 Route::get('/admin/keuangan/create', [FinancialController::class, 'create'])->name('admin.financial.create');
 Route::post('/admin/keuangan', [FinancialController::class, 'store'])->name('admin.financial.store');
+Route::get('/admin/keuangan/{id}/edit', [FinancialController::class, 'edit'])->name('admin.financial.edit');
+Route::put('/admin/keuangan/{id}', [FinancialController::class, 'update'])->name('admin.financial.update');
+Route::delete('/admin/keuangan/{id}', [FinancialController::class, 'destroy'])->name('admin.financial.destroy');
 
 Route::get('/transparansi-keuangan', [App\Http\Controllers\FinancialController::class, 'userIndex'])->name('transparansi');

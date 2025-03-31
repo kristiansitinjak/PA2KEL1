@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">HIMATIF <sup></sup></div>
+        <div class="sidebar-brand-text mx-3">HIMATIF</div>
     </a>
 
     <!-- Divider -->
@@ -23,45 +23,42 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- 📌 KATEGORI: STATUS PEMBAYARAN MAHASISWA -->
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePayments"
-        aria-expanded="true" aria-controls="collapsePayments">
-        <i class="fas fa-fw fa-money-check-alt"></i>
-        <span>Status Pembayaran</span>
-    </a>
-    <div id="collapsePayments" class="collapse" aria-labelledby="headingPayments" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ route('admin.payments.index') }}">
-                <i class="fas fa-list"></i> Daftar Pembayaran
-            </a>
+    <!-- Status Pembayaran Mahasiswa -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePayments"
+            aria-expanded="true" aria-controls="collapsePayments">
+            <i class="fas fa-fw fa-money-check-alt"></i>
+            <span>Status Pembayaran</span>
+        </a>
+        <div id="collapsePayments" class="collapse" aria-labelledby="headingPayments" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('admin.payments.index') }}">
+                    <i class="fas fa-list"></i> Daftar Pembayaran
+                </a>
+            </div>
         </div>
-    </div>
-</li>
+    </li>
 
-<!-- 📌 KATEGORI: FINANCIAL RECORD -->
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinancial"
-        aria-expanded="true" aria-controls="collapseFinancial">
-        <i class="fas fa-fw fa-coins"></i>
-        <span>Financial Record</span>
-    </a>
-    <div id="collapseFinancial" class="collapse" aria-labelledby="headingFinancial" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ route('admin.financial.index') }}">
-                <i class="fas fa-list"></i> Lihat Data Keuangan
-            </a>
-            <a class="collapse-item" href="{{ route('admin.financial.create') }}">
-                <i class="fas fa-plus-circle"></i> Tambah Pemasukan/Pengeluaran
-            </a>
+    <!-- Financial Record -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinancial"
+            aria-expanded="true" aria-controls="collapseFinancial">
+            <i class="fas fa-fw fa-coins"></i>
+            <span>Financial Record</span>
+        </a>
+        <div id="collapseFinancial" class="collapse" aria-labelledby="headingFinancial" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('admin.financial.index') }}">
+                    <i class="fas fa-list"></i> Lihat Data Keuangan
+                </a>
+                <a class="collapse-item" href="{{ route('admin.financial.create') }}">
+                    <i class="fas fa-plus-circle"></i> Tambah Pemasukan/Pengeluaran
+                </a>
+            </div>
         </div>
-    </div>
-</li>
+    </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- 📌 KATEGORI: MANAJEMEN BERITA -->
+    <!-- Manajemen Berita -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNews"
             aria-expanded="true" aria-controls="collapseNews">
@@ -80,10 +77,7 @@
         </div>
     </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- 📌 KATEGORI: MANAJEMEN ANGGOTA -->
+    <!-- Manajemen Anggota -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMembers"
             aria-expanded="true" aria-controls="collapseMembers">
@@ -102,10 +96,7 @@
         </div>
     </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- 📌 KATEGORI: MANAJEMEN MAHASISWA (DROPDOWN DENGAN TAMBAHAN "TAMBAH MAHASISWA") -->
+    <!-- Manajemen Mahasiswa -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMahasiswa"
             aria-expanded="true" aria-controls="collapseMahasiswa">
@@ -124,6 +115,25 @@
         </div>
     </li>
 
+    <!-- Proposal Kegiatan -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProposals"
+            aria-expanded="true" aria-controls="collapseProposals">
+            <i class="fas fa-fw fa-file-alt"></i>
+            <span>Proposal Kegiatan</span>
+        </a>
+        <div id="collapseProposals" class="collapse" aria-labelledby="headingProposals" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('admin.proposals.index') }}">
+                    <i class="fas fa-list"></i> Daftar Proposal
+                </a>
+                <a class="collapse-item" href="{{ route('admin.proposals.create') }}">
+                    <i class="fas fa-plus-circle"></i> Tambah Proposal
+                </a>
+            </div>
+        </div>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
@@ -132,7 +142,7 @@
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 
-    <!-- 📌 KEMBALI KE HOME -->
+    <!-- Kembali ke Home -->
     <li class="text-center mt-3">
         <a href="{{ url('/home') }}" class="btn btn-primary btn-lg" style="background-color: #007bff; color: white; border-radius: 8px; padding: 10px 20px;">
             🏠 Kembali ke Home

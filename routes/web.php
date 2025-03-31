@@ -11,6 +11,9 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\SpreadsheetController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\FinancialController;
+use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\AuthController;
+
 
 
 // ============================
@@ -152,3 +155,29 @@ Route::put('/admin/keuangan/{id}', [FinancialController::class, 'update'])->name
 Route::delete('/admin/keuangan/{id}', [FinancialController::class, 'destroy'])->name('admin.financial.destroy');
 
 Route::get('/transparansi-keuangan', [App\Http\Controllers\FinancialController::class, 'userIndex'])->name('transparansi');
+
+
+// Admin 1 (BPH)
+// Admin 1 (BPH) - Tanpa Login
+Route::get('/admin/proposals', [ProposalController::class, 'indexAdmin'])->name('admin.proposals.index');
+Route::get('/admin/proposals/create', [ProposalController::class, 'create'])->name('admin.proposals.create');
+Route::post('/admin/proposals', [ProposalController::class, 'store'])->name('admin.proposals.store');
+Route::get('/admin/proposals/{id}', [ProposalController::class, 'showAdmin'])->name('admin.proposals.show');
+
+// Admin 2 (Kaprodi) - Tanpa Login
+Route::get('/admin2/proposals', [ProposalController::class, 'indexAdmin2'])->name('admin2.proposals.index');
+Route::get('/admin2/proposals/{id}', [ProposalController::class, 'showAdmin2'])->name('admin2.proposals.show');
+Route::post('/admin2/proposals/{id}/approve', [ProposalController::class, 'approve'])->name('admin2.proposals.approve');
+Route::get('/admin2/proposals/pending', [ProposalController::class, 'pendingAdmin2'])->name('admin2.proposals.pending');
+Route::get('/admin2/proposals/approved', [ProposalController::class, 'approvedAdmin2'])->name('admin2.proposals.approved');
+Route::get('/admin2/proposals/rejected', [ProposalController::class, 'rejectedAdmin2'])->name('admin2.proposals.rejected');
+
+
+
+// ============================
+// Rute LOGIN
+// ============================
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

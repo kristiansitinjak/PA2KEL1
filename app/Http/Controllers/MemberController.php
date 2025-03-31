@@ -58,13 +58,13 @@ class MemberController extends Controller
     public function update(Request $request, Member $member)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'jabatan' => 'required|string|max:255',
-            'phone' => 'required|string|max:15|unique:members,phone,'.$member->id,
+            'name' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'jabatan' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'phone' => 'required|numeric|digits_between:10,15|unique:members,phone,'.$member->id,
             'email' => 'required|email|max:255|unique:members,email,'.$member->id,
             'category_id' => 'required|exists:categories,id',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
+        ]);        
     
         if ($request->hasFile('photo')) {
             if ($member->photo) {

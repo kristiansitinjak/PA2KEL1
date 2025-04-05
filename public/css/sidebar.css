@@ -1,0 +1,22 @@
+/* Ubah warna dropdown ketika dibuka */
+.sidebar .nav-item .nav-link[aria-expanded="true"] {
+    background-color: #003366 !important; /* Warna biru gelap */
+    color: white !important; /* Teks putih */
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Ubah tampilan item dropdown */
+.sidebar .collapse-inner .collapse-item.active {
+    background-color: #003366 !important;
+    color: white !important;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Tambahkan hover effect */
+.sidebar .collapse-inner .collapse-item:hover {
+    background-color: #0056b3 !important; /* Warna biru lebih terang */
+    color: white !important;
+    border-radius: 5px;
+}

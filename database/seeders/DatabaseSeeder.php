@@ -11,13 +11,28 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    public function run(): void
-    {
-        // User::factory(10)->create();
+    public function run()
+{
+    // 1. Tambah role dasar
+    DB::table('roles')->insert([
+        ['role_name' => 'bph'],
+        ['role_name' => 'pembina'],
+        ['role_name' => 'mahasiswa']
+    ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-    }
+    // 2. Buat akun admin/Kaprodi manual
+    DB::table('users')->insert([
+        'username' => 'pembina',
+        'password_hash' => bcrypt('pembina123'),
+        'prodi' => null,
+        'is_from_api' => false
+    ]);
+
+    // 3. Assign role kaprodi
+    DB::table('organization_members')->insert([
+        'user_id' => 1, // ID user kaprodi
+        'role_id' => 2, // ID role kaprodi
+        'is_bph' => false
+    ]);
+}
 }

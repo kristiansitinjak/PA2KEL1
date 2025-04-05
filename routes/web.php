@@ -12,7 +12,9 @@ use App\Http\Controllers\SpreadsheetController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\FinancialController;
 use App\Http\Controllers\ProposalController;
+// use App\Http\Controllers\CekLoginController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
 
 
@@ -57,9 +59,6 @@ Route::get('/index', function () {
 // ============================
 // Rute Halaman Admin
 // ============================
-Route::get('/admin', function () {
-    return view('admin.admin');
-})->name('admin');
 
 Route::get('/admin2', function () {
     return view('admin2.home');
@@ -178,7 +177,20 @@ Route::get('/admin2/proposals/rejected', [ProposalController::class, 'rejectedAd
 // Rute LOGIN
 // ============================
 
-
+Route::get('/custom-login', [CekLoginController::class, 'index']);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/custom-login', [AuthController::class, 'login'])->name('custom.login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+
+// Route::middleware(['ceklogin'])->group(function () {
+//     Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+// });
+
+// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+// Route::post('/login', [AuthController::class, 'login']);
+// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+// // Route::middleware(['ceklogin'])->group(function () {
+// //     Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+// // });

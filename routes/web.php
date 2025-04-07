@@ -11,8 +11,7 @@ use App\Http\Controllers\SpreadsheetController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\FinancialController;
 use App\Http\Controllers\ProposalController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Auth\LoginController;
+
 
 
 // ============================
@@ -156,22 +155,4 @@ Route::prefix('admin')->group(function () {
     Route::get('/proposals/{proposal}/download', [ProposalController::class, 'download'])->name('admin.proposals.download'); // Tambahkan rute download
 });
 
-
-
-
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth.api');
-Route::get('/user', [AuthController::class, 'user'])->middleware('auth.api');
-
-
-
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-Route::middleware(['checkAuth'])->group(function () {
-    Route::get('/admin', function () {
-        return view('admin.admin');
-    })->name('admin');
-});
 

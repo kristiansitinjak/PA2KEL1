@@ -124,6 +124,26 @@
         </div>
     </li>
 
+    <div class="sidebar">
+    <ul class="nav flex-column">
+        <!-- Link ke Halaman Daftar Proposal -->
+        <li class="nav-item">
+            <a class="nav-link active" href="{{ route('admin.proposals.index') }}">
+                <i class="bi bi-list-check"></i> Daftar Proposal
+            </a>
+        </li>
+
+        <!-- Link ke Halaman Upload Proposal (Create) -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.proposals.create') }}">
+                <i class="bi bi-cloud-upload"></i> Upload Proposal
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

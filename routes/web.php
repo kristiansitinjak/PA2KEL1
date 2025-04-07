@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LaporanKeuanganController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\CategoryController;
@@ -11,6 +10,9 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\SpreadsheetController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\FinancialController;
+use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\LoginController;
 
 
 // ============================
@@ -62,16 +64,6 @@ Route::get('/admin2', function () {
     return view('admin2.home');
 });
 
-// ============================
-// Rute Keuangan
-// ============================
-Route::get('/keuangan', [LaporanKeuanganController::class, 'index'])->name('keuangan.index');
-Route::get('/keuangan/create', [LaporanKeuanganController::class, 'create'])->name('keuangan.create');
-Route::resource('keuangan', LaporanKeuanganController::class);
-
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/keuangan', [LaporanKeuanganController::class, 'index'])->name('admin.keuangan.index');
-});
 
 // ============================
 // Rute Berita (News)
@@ -152,3 +144,34 @@ Route::put('/admin/keuangan/{id}', [FinancialController::class, 'update'])->name
 Route::delete('/admin/keuangan/{id}', [FinancialController::class, 'destroy'])->name('admin.financial.destroy');
 
 Route::get('/transparansi-keuangan', [App\Http\Controllers\FinancialController::class, 'userIndex'])->name('transparansi');
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/proposals', [ProposalController::class, 'index'])->name('admin.proposals.index');
+    Route::get('/proposals/create', [ProposalController::class, 'create'])->name('admin.proposals.create'); 
+    Route::post('/proposals', [ProposalController::class, 'store'])->name('admin.proposals.store');
+    Route::get('/proposals/{proposal}', [ProposalController::class, 'show'])->name('admin.proposals.show');
+    Route::patch('/proposals/{proposal}/approve', [ProposalController::class, 'approve'])->name('admin.proposals.approve');
+    Route::patch('/proposals/{proposal}/reject', [ProposalController::class, 'reject'])->name('admin.proposals.reject');
+    Route::get('/proposals/{proposal}/download', [ProposalController::class, 'download'])->name('admin.proposals.download'); // Tambahkan rute download
+});
+
+
+
+
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth.api');
+Route::get('/user', [AuthController::class, 'user'])->middleware('auth.api');
+
+
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::middleware(['checkAuth'])->group(function () {
+    Route::get('/admin', function () {
+        return view('admin.admin');
+    })->name('admin');
+});
+

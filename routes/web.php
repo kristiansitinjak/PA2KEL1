@@ -10,7 +10,6 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\SpreadsheetController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\FinancialController;
-use App\Http\Controllers\ProposalController;
 
 
 
@@ -145,14 +144,6 @@ Route::delete('/admin/keuangan/{id}', [FinancialController::class, 'destroy'])->
 Route::get('/transparansi-keuangan', [App\Http\Controllers\FinancialController::class, 'userIndex'])->name('transparansi');
 
 
-Route::prefix('admin')->group(function () {
-    Route::get('/proposals', [ProposalController::class, 'index'])->name('admin.proposals.index');
-    Route::get('/proposals/create', [ProposalController::class, 'create'])->name('admin.proposals.create'); 
-    Route::post('/proposals', [ProposalController::class, 'store'])->name('admin.proposals.store');
-    Route::get('/proposals/{proposal}', [ProposalController::class, 'show'])->name('admin.proposals.show');
-    Route::patch('/proposals/{proposal}/approve', [ProposalController::class, 'approve'])->name('admin.proposals.approve');
-    Route::patch('/proposals/{proposal}/reject', [ProposalController::class, 'reject'])->name('admin.proposals.reject');
-    Route::get('/proposals/{proposal}/download', [ProposalController::class, 'download'])->name('admin.proposals.download'); // Tambahkan rute download
-});
+
 
 

@@ -41,7 +41,9 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center flex-nowrap pt-xl-0" style="margin-left: 15px;">
-                    <a href="{{ route('admin') }}" class="btn-hover-bg btn btn-primary text-white py-2 px-4 me-3">Login</a>
+                    <a href="{{ route('login') }}" class="nav-item nav-link {{ request()->is('login') ? 'active' : '' }}">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
                 </div>
             </div>
         </nav>

@@ -179,6 +179,25 @@ Route::get('/admin2/proposals/rejected', [ProposalController::class, 'rejectedAd
 // ============================
 
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
+
+Route::middleware(['auth', 'mahasiswa'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
+
+

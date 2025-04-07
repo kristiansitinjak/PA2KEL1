@@ -1,5 +1,4 @@
 <?php
-
 return [
 
     /*
@@ -13,6 +12,11 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+
+    'campus_api' => [
+        'base_url' => env('CAMPUS_API_URL', 'https://cis.del.ac.id/api'), 
+        'login_endpoint' => env('CAMPUS_API_LOGIN_ENDPOINT', '/login'),
+    ],
 
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),

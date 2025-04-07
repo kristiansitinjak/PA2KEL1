@@ -11,8 +11,9 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\SpreadsheetController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\FinancialController;
-use App\Http\Controllers\ProposalController;
+// use App\Http\Controllers\CekLoginController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
 
 
@@ -57,9 +58,6 @@ Route::get('/index', function () {
 // ============================
 // Rute Halaman Admin
 // ============================
-Route::get('/admin', function () {
-    return view('admin.admin');
-})->name('admin');
 
 Route::get('/admin2', function () {
     return view('admin2.home');
@@ -158,21 +156,6 @@ Route::get('/transparansi-keuangan', [App\Http\Controllers\FinancialController::
 
 
 // Admin 1 (BPH)
-// Admin 1 (BPH) - Tanpa Login
-Route::get('/admin/proposals', [ProposalController::class, 'indexAdmin'])->name('admin.proposals.index');
-Route::get('/admin/proposals/create', [ProposalController::class, 'create'])->name('admin.proposals.create');
-Route::post('/admin/proposals', [ProposalController::class, 'store'])->name('admin.proposals.store');
-Route::get('/admin/proposals/{id}', [ProposalController::class, 'showAdmin'])->name('admin.proposals.show');
-
-// Admin 2 (Kaprodi) - Tanpa Login
-Route::get('/admin2/proposals', [ProposalController::class, 'indexAdmin2'])->name('admin2.proposals.index');
-Route::get('/admin2/proposals/{id}', [ProposalController::class, 'showAdmin2'])->name('admin2.proposals.show');
-Route::post('/admin2/proposals/{id}/approve', [ProposalController::class, 'approve'])->name('admin2.proposals.approve');
-Route::get('/admin2/proposals/pending', [ProposalController::class, 'pendingAdmin2'])->name('admin2.proposals.pending');
-Route::get('/admin2/proposals/approved', [ProposalController::class, 'approvedAdmin2'])->name('admin2.proposals.approved');
-Route::get('/admin2/proposals/rejected', [ProposalController::class, 'rejectedAdmin2'])->name('admin2.proposals.rejected');
-
-
 
 // ============================
 // Rute LOGIN
@@ -180,13 +163,8 @@ Route::get('/admin2/proposals/rejected', [ProposalController::class, 'rejectedAd
 
 
 
-
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// Route::post('/login', [AuthController::class, 'login']);
+// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/dashboard', function () {
@@ -194,10 +172,28 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 //     })->name('dashboard');
 // });
 
-Route::middleware(['auth', 'mahasiswa'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Route::middleware(['auth', 'mahasiswa'])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
 
+
+Route::get('/custom-login', [CekLoginController::class, 'index']);
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/custom-login', [AuthController::class, 'login'])->name('custom.login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+
+// Route::middleware(['ceklogin'])->group(function () {
+//     Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+// });
+
+// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+// Route::post('/login', [AuthController::class, 'login']);
+// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+// // Route::middleware(['ceklogin'])->group(function () {
+// //     Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+// // });
 

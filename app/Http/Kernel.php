@@ -68,5 +68,12 @@ class Kernel extends HttpKernel
 
         // Menambahkan Middleware Mahasiswa
         'mahasiswa' => \App\Http\Middleware\MahasiswaMiddleware::class,
+        'apiauth' => \App\Http\Middleware\ApiAuthMiddleware::class,
+        'ceklogin' => \App\Http\Middleware\CekLogin::class,
+
+    ];
+
+    protected $routeMiddleware = [
+        
     ];
 }

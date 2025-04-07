@@ -3,63 +3,89 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use App\Services\CampusAuthService;
+use Illuminate\Support\Facades\Http;
 
 class AuthController extends Controller
 {
-    protected $campusAuthService;
-
-    public function __construct(CampusAuthService $campusAuthService)
+    public function showLoginForm()
     {
-        $this->campusAuthService = $campusAuthService;
+        return view('auth.login'); // atau 'auth.login' tergantung lokasi file blade
     }
 
     public function login(Request $request)
     {
-        // Validasi input dari user
         $request->validate([
-            'nim' => 'required|string',
-            'password' => 'required|string',
+            'username' => 'required|string',
+            'password' => 'required|string|min:8',
         ]);
-
-        // Autentikasi dengan API Kampus
-        $response = $this->campusAuthService->authenticate($request->nim, $request->password);
-
-        // Debugging: Lihat isi response API
-        dd($response);
-
-        // Pastikan API memberikan response yang valid
-        if (!isset($response['success']) || !$response['success'] || !isset($response['data'])) {
-            return back()->withErrors(['nim' => 'Login gagal, cek kembali NIM dan password.']);
-        }
-
-        // Ambil data mahasiswa dari API
-        $mahasiswaData = $response['data'];
-
-        // Cek apakah user sudah ada di database
-        $user = User::where('nim', $mahasiswaData['nim'])->first();
-
-        // Jika belum ada, buat user baru
-        if (!$user) {
-            $user = User::create([
-                'nim' => $mahasiswaData['nim'],
-                'name' => $mahasiswaData['name'],
-                'role' => 'mahasiswa', // Default role mahasiswa
-                'password' => bcrypt($request->password), // Hanya untuk kebutuhan Laravel (tidak digunakan untuk autentikasi nyata)
+    
+        $username = $request->input('username');
+        $password = $request->input('password');
+    
+        try {
+            $response = Http::asForm()->post('https://cis.del.ac.id/api/jwt-api/do-auth', [
+                'username' => $username,
+                'password' => $password,
             ]);
+    
+            if ($response->successful()) {
+                $data = $response->json();
+    
+                if (isset($data['token'])) {
+                    $token = $data['token'];
+                    $user = $data['user'] ?? [];
+    
+                    $username = $user['username'] ?? null;
+    
+                    if ($username) {
+                        // Perbaiki bagian ini
+                        $profileResponse = Http::withToken($token)->get(
+                            'https://cis.del.ac.id/api/library-api/mahasiswa?nama=&nim=&angkatan=&userid=&username=&prodi=&status=Aktif&limit',
+                            [
+                                'username' => $username,
+                                'status' => 'Aktif',
+                            ]
+                        );
+    
+                        if ($profileResponse->successful()) {
+                            $mahasiswaList = $profileResponse->json();
+                            $mahasiswa = $mahasiswaList['data']['mahasiswa'][0] ?? null;
+                            // dd($mahasiswaList);
+    
+                            if ($mahasiswa && ($mahasiswa['prodi_name'] ?? null) === 'DIII Teknologi Informasi') {
+                                session([
+                                    'token' => $token,
+                                    'user' => array_merge($user, [
+                                        'nama' => $mahasiswa['nama'] ?? $user['username'] ?? 'User',
+                                        'prodi' => $mahasiswa['prodi_name']
+                                    ])
+                                ]);
+    
+                                return redirect('/admin')->with('success', 'Login berhasil!');
+                            } else {
+                                return back()->withErrors([
+                                    'login' => 'Hanya mahasiswa DIII Teknologi Informasi yang diperbolehkan login.'
+                                ]);
+                            }
+                        }
+    
+                        return back()->withErrors(['login' => 'Gagal mengambil data mahasiswa.']);
+                    }
+    
+                    return back()->withErrors(['login' => 'Username tidak ditemukan.']);
+                }
+            }
+    
+            return back()->withErrors(['login' => 'Email atau password salah.']);
+        } catch (\Exception $e) {
+            return back()->withErrors(['login' => 'Terjadi kesalahan: ' . $e->getMessage()]);
         }
-
-        // Login user ke Laravel
-        Auth::login($user);
-
-        return redirect()->route('dashboard')->with('success', 'Login berhasil!');
     }
+       
 
     public function logout()
     {
-        Auth::logout();
-        return redirect('/login')->with('success', 'Anda telah logout.');
+        session()->forget('user');
+        return redirect()->route('login');
     }
 }

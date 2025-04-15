@@ -7,7 +7,6 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StrukturController;
 use App\Http\Controllers\StructureController;
-use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\SpreadsheetController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\FinancialController;
@@ -62,10 +61,6 @@ Route::get('/index', function () {
 // Rute Halaman Admin
 // ============================
 
-Route::get('/admin2', function () {
-    return view('admin2.home');
-});
-
 // ============================
 // Rute Keuangan
 // ============================
@@ -106,36 +101,9 @@ Route::get('/admin/members', [MemberController::class, 'index'])->name('admin.me
 // ============================
 Route::get('/struktur', [StrukturController::class, 'index'])->name('struktur.index');
 
-
-// ============================
-// RUTE MANAJEMEN MAHASISWA
-// ============================
-
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
-    Route::get('/mahasiswa/create', [MahasiswaController::class, 'create'])->name('mahasiswa.create');
-    Route::post('/mahasiswa', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
-    Route::get('/mahasiswa/{mahasiswa}/edit', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
-    Route::put('/mahasiswa/{mahasiswa}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
-    Route::delete('/mahasiswa/{mahasiswa}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
-
-    // ✅ Perbaikan rute updateStatus (gunakan POST, tanpa "/admin" di dalam URL)
-    Route::post('/mahasiswa/update-status', [MahasiswaController::class, 'updateStatus'])
-        ->name('mahasiswa.updateStatus');
-
-    // Kirim data ke Admin 2
-    Route::patch('/mahasiswa/{id}/kirim', [MahasiswaController::class, 'kirimKeAdmin2'])->name('mahasiswa.kirim');
-});
-
 // ============================
 // ADMIN 2 - Verifikasi Mahasiswa
 // ============================
-
-Route::prefix('admin2')->name('admin2.')->group(function () {
-    Route::get('/mahasiswa/verifikasi', [MahasiswaController::class, 'verifikasi'])->name('mahasiswa.index');
-    Route::patch('/mahasiswa/{mahasiswa}/approve', [MahasiswaController::class, 'approve'])->name('mahasiswa.approve');
-    Route::patch('/mahasiswa/{mahasiswa}/reject', [MahasiswaController::class, 'reject'])->name('mahasiswa.reject');
-});
 
 // spreadset
 Route::get('/spreadsheet',

@@ -116,21 +116,6 @@ class AuthController extends Controller
     public function logout()
     {
         session()->forget('user');
-        session()->forget('token');
-        return redirect()->route('login')->with('success', 'Berhasil logout.');
-    }
-
-    private function redirectBasedOnRole($role)
-    {
-        switch ($role) {
-            case 'admin':
-            case 'admin2':
-                return redirect('/admin')->with('success', 'Login berhasil!');
-            case 'bendahara':
-                return redirect('/admin/keuangan')->with('success', 'Login berhasil!');
-            case 'mahasiswa':
-            default:
-                return redirect('/')->with('success', 'Login berhasil!');
-        }
+        return redirect()->route('login');
     }
 }

@@ -124,6 +124,7 @@ class AuthController extends Controller
     {
         switch ($role) {
             case 'admin':
+            case 'admin2':
                 return redirect('/admin')->with('success', 'Login berhasil!');
             case 'bendahara':
                 return redirect('/admin/keuangan')->with('success', 'Login berhasil!');

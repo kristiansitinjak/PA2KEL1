@@ -1,7 +1,49 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container text-center">
+<style>
+    .main-content {
+        padding-top: 120px;
+    }
+
+    @media (max-width: 768px) {
+        .main-content {
+            padding-top: 100px;
+        }
+    }
+
+    .pyramid-row {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .member-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 20px;
+        text-align: center;
+        width: 250px;
+        transition: transform 0.2s ease;
+    }
+
+    .member-card:hover {
+        transform: scale(1.03);
+    }
+
+    .member-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #ccc;
+    }
+</style>
+
+<div class="container text-center main-content">
     <h1 class="mb-5">Struktur Organisasi {{ $category->name }}</h1>
 
     @if ($category->members->count() > 0)
@@ -38,7 +80,4 @@
         <p class="text-muted">Belum ada anggota di kategori ini.</p>
     @endif
 </div>
-
-{{-- Link ke file CSS eksternal --}}
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 @endsection

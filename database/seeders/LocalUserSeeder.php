@@ -18,6 +18,12 @@ class LocalUserSeeder extends Seeder
                 'role' => 'admin',
             ],
             [
+                'username' => 'admin2',
+                'nama' => 'Admin Dua',
+                'password' => Hash::make('admin12345'),
+                'role' => 'admin2',
+            ],
+            [
                 'username' => 'bendahara1',
                 'nama' => 'Bendahara Contoh',
                 'password' => Hash::make('bendahara123'),

@@ -20,7 +20,7 @@ return new class extends Migration
         $table->string('nim')->nullable();
         $table->string('angkatan')->nullable();
         $table->string('prodi')->nullable();
-        $table->string('role')->nullable(); // admin, bendahara, mahasiswa
+        $table->string('role')->nullable(); // admin1, admin2, bendahara, mahasiswa
         $table->timestamps();
     });
 }

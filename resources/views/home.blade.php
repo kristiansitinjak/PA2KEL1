@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-md-4 d-flex flex-column align-items-center">
                                 <h1>🎧 500</h1>
-                                <p>Anggota Himasi</p>
+                                <p>Anggota Himatif</p>
                             </div>
                         </div>
                     </div>

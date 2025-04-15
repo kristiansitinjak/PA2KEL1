@@ -5,21 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\FinancialRecord;
 use App\Models\Detail;
+use Illuminate\Support\Facades\Session;
 
 class FinancialController extends Controller
 {
-    // Menampilkan daftar transaksi keuangan untuk admin
+    // Fungsi bantu untuk memeriksa role
+    private function checkBendaharaRole()
+    {
+        $user = Session::get('user'); // Ubah kunci dari 'LocalUser' ke 'user'
+        if (!$user || !isset($user['role']) || $user['role'] !== 'bendahara') {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini. Hanya bendahara yang diperbolehkan.');
+        }
+    }
+
     public function index()
     {
+        $this->checkBendaharaRole(); // Panggil fungsi tanpa redirect
+
         $records = FinancialRecord::with('details')->orderBy('tanggal', 'desc')->get();
         return view('admin.financial.index', compact('records'));
     }
 
-    // Menampilkan transparansi keuangan untuk pengguna
     public function userIndex()
     {
         $records = FinancialRecord::with('details')->orderBy('tanggal', 'desc')->get();
-
         $totalPemasukan = FinancialRecord::where('jenis', 'Pemasukan')->sum('jumlah');
         $totalPengeluaran = FinancialRecord::where('jenis', 'Pengeluaran')->sum('jumlah');
         $saldoAkhir = $totalPemasukan - $totalPengeluaran;
@@ -27,15 +36,17 @@ class FinancialController extends Controller
         return view('transparansi', compact('records', 'totalPemasukan', 'totalPengeluaran', 'saldoAkhir'));
     }
 
-    // Menampilkan form tambah data keuangan
     public function create()
     {
+        $this->checkBendaharaRole();
+
         return view('admin.financial.create');
     }
 
-    // Menyimpan data keuangan baru
     public function store(Request $request)
     {
+        $this->checkBendaharaRole();
+
         $request->validate([
             'tanggal' => 'required|date',
             'keterangan' => 'required',
@@ -45,10 +56,8 @@ class FinancialController extends Controller
             'detail_jumlah.*' => 'nullable|numeric'
         ]);
 
-        // Simpan data keuangan utama
         $financial = FinancialRecord::create($request->only(['tanggal', 'keterangan', 'jenis', 'jumlah']));
 
-        // Simpan detail transaksi
         if ($request->detail_keterangan) {
             foreach ($request->detail_keterangan as $index => $keterangan) {
                 if (!empty($keterangan) && isset($request->detail_jumlah[$index])) {
@@ -64,16 +73,18 @@ class FinancialController extends Controller
         return redirect()->route('admin.financial.index')->with('success', 'Data berhasil ditambahkan.');
     }
 
-    // Menampilkan form edit data keuangan
     public function edit($id)
     {
+        $this->checkBendaharaRole();
+
         $record = FinancialRecord::with('details')->findOrFail($id);
         return view('admin.financial.edit', compact('record'));
     }
 
-    // Memperbarui data keuangan beserta detailnya
     public function update(Request $request, $id)
     {
+        $this->checkBendaharaRole();
+
         $request->validate([
             'tanggal' => 'required|date',
             'keterangan' => 'required|string',
@@ -83,14 +94,10 @@ class FinancialController extends Controller
             'detail_jumlah.*' => 'nullable|numeric'
         ]);
 
-        // Update data utama
         $record = FinancialRecord::findOrFail($id);
         $record->update($request->only(['tanggal', 'keterangan', 'jenis', 'jumlah']));
-
-        // Hapus detail lama
         $record->details()->delete();
 
-        // Tambahkan detail baru
         if ($request->detail_keterangan) {
             foreach ($request->detail_keterangan as $index => $keterangan) {
                 if (!empty($keterangan) && isset($request->detail_jumlah[$index])) {
@@ -106,12 +113,13 @@ class FinancialController extends Controller
         return redirect()->route('admin.financial.index')->with('success', 'Data berhasil diperbarui.');
     }
 
-    // Menghapus data keuangan dan detailnya
     public function destroy($id)
     {
+        $this->checkBendaharaRole();
+
         $record = FinancialRecord::findOrFail($id);
-        $record->details()->delete(); // Hapus detail
-        $record->delete(); // Hapus utama
+        $record->details()->delete();
+        $record->delete();
 
         return redirect()->route('admin.financial.index')->with('success', 'Data berhasil dihapus.');
     }

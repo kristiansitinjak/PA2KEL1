@@ -7,23 +7,27 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index()
-    {
-        // Ambil data user dari session
-        $user = session('user');
+{
+    // Ambil data user dari session
+    $user = session('user');
+    $role = session('role');
 
-        // Cek apakah user login
-        if (!$user) {
-            return redirect('/login')->withErrors(['email' => 'Silakan login terlebih dahulu.']);
-        }
+    // Cek apakah user login
+    if (!$user) {
+        return redirect('/login')->withErrors(['email' => 'Silakan login terlebih dahulu.']);
+    }
 
-        // Validasi prodi (cadangan jika middleware dilewati)
+    // Kalau role-nya mahasiswa, cek prodi harus DIII Teknologi Informasi
+    if ($role === 'mahasiswa') {
         if (!isset($user['prodi']) || $user['prodi'] !== 'DIII Teknologi Informasi') {
             session()->forget('user');
             session()->forget('token');
             return redirect('/login')->withErrors(['email' => 'Akses hanya untuk mahasiswa DIII Teknologi Informasi.']);
         }
-
-        // Tampilkan dashboard dengan data user
-        return view('admin.dashboard', compact('user'));
     }
+
+    // Kalau bukan mahasiswa, lanjutkan (admin lokal, bendahara, dll)
+    return view('admin.dashboard', compact('user'));
+}
+
 }

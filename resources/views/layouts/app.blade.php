@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
 
 </head>
-<body>
+<bodyww>
 
 
     @include('partials.navbar')

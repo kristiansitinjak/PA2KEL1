@@ -115,20 +115,39 @@
         </div>
     </li>
 
-    <!-- Proposal Kegiatan -->
+    <!-- Program Kerja -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProposals"
-            aria-expanded="true" aria-controls="collapseProposals">
-            <i class="fas fa-fw fa-file-alt"></i>
-            <span>Proposal Kegiatan</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProgramKerja"
+            aria-expanded="true" aria-controls="collapseProgramKerja">
+            <i class="fas fa-fw fa-calendar-check"></i>
+            <span>Program Kerja</span>
         </a>
-        <div id="collapseProposals" class="collapse" aria-labelledby="headingProposals" data-parent="#accordionSidebar">
+        <div id="collapseProgramKerja" class="collapse" aria-labelledby="headingProgramKerja" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('admin.proposals.index') }}">
-                    <i class="fas fa-list"></i> Daftar Proposal
+                <a class="collapse-item" href="{{ route('programkerja.index') }}">
+                    <i class="fas fa-list"></i> Daftar Program
                 </a>
-                <a class="collapse-item" href="{{ route('admin.proposals.create') }}">
-                    <i class="fas fa-plus-circle"></i> Tambah Proposal
+                <a class="collapse-item" href="{{ route('programkerja.create') }}">
+                    <i class="fas fa-plus-circle"></i> Tambah Program
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Manajemen Event -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEvent"
+            aria-expanded="true" aria-controls="collapseEvent">
+            <i class="fas fa-fw fa-calendar-alt"></i>
+            <span>Manajemen Event</span>
+        </a>
+        <div id="collapseEvent" class="collapse" aria-labelledby="headingEvent" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('events.index') }}">
+                    <i class="fas fa-list"></i> Daftar Event
+                </a>
+                <a class="collapse-item" href="{{ route('events.create') }}">
+                    <i class="fas fa-plus-circle"></i> Tambah Event
                 </a>
             </div>
         </div>

@@ -48,7 +48,7 @@ class FinancialController extends Controller
         // Simpan data keuangan utama
         $financial = FinancialRecord::create($request->only(['tanggal', 'keterangan', 'jenis', 'jumlah']));
 
-        // Jika ada detail transaksi, simpan ke tabel detail
+        // Simpan detail transaksi
         if ($request->detail_keterangan) {
             foreach ($request->detail_keterangan as $index => $keterangan) {
                 if (!empty($keterangan) && isset($request->detail_jumlah[$index])) {
@@ -83,14 +83,14 @@ class FinancialController extends Controller
             'detail_jumlah.*' => 'nullable|numeric'
         ]);
 
-        // Update transaksi utama
+        // Update data utama
         $record = FinancialRecord::findOrFail($id);
         $record->update($request->only(['tanggal', 'keterangan', 'jenis', 'jumlah']));
 
-        // Hapus semua detail lama sebelum menambahkan yang baru
+        // Hapus detail lama
         $record->details()->delete();
 
-        // Tambahkan detail baru jika ada
+        // Tambahkan detail baru
         if ($request->detail_keterangan) {
             foreach ($request->detail_keterangan as $index => $keterangan) {
                 if (!empty($keterangan) && isset($request->detail_jumlah[$index])) {
@@ -106,12 +106,12 @@ class FinancialController extends Controller
         return redirect()->route('admin.financial.index')->with('success', 'Data berhasil diperbarui.');
     }
 
-    // Menghapus data keuangan beserta detailnya
+    // Menghapus data keuangan dan detailnya
     public function destroy($id)
     {
         $record = FinancialRecord::findOrFail($id);
-        $record->details()->delete(); // Hapus semua detail terkait
-        $record->delete(); // Hapus transaksi utama
+        $record->details()->delete(); // Hapus detail
+        $record->delete(); // Hapus utama
 
         return redirect()->route('admin.financial.index')->with('success', 'Data berhasil dihapus.');
     }

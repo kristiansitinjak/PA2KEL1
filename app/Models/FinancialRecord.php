@@ -16,6 +16,3 @@ class FinancialRecord extends Model
         return $this->hasMany(Detail::class, 'financial_id');
     }
 }
-
-
-

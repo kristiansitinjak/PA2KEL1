@@ -14,6 +14,8 @@ use App\Http\Controllers\FinancialController;
 // use App\Http\Controllers\CekLoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProgramKerjaController;
+use App\Http\Controllers\EventController;
 
 
 
@@ -58,10 +60,7 @@ Route::get('/index', function () {
 // ============================
 // Rute Halaman Admin
 // ============================
-
-Route::get('/admin2', function () {
-    return view('admin2.home');
-});
+ 
 
 // ============================
 // Rute Keuangan
@@ -128,11 +127,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 // ADMIN 2 - Verifikasi Mahasiswa
 // ============================
 
-Route::prefix('admin2')->name('admin2.')->group(function () {
-    Route::get('/mahasiswa/verifikasi', [MahasiswaController::class, 'verifikasi'])->name('mahasiswa.index');
-    Route::patch('/mahasiswa/{mahasiswa}/approve', [MahasiswaController::class, 'approve'])->name('mahasiswa.approve');
-    Route::patch('/mahasiswa/{mahasiswa}/reject', [MahasiswaController::class, 'reject'])->name('mahasiswa.reject');
-});
 
 // spreadset
 Route::get('/spreadsheet',
@@ -197,3 +191,22 @@ Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
 // //     Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
 // // });
 
+Route::prefix('admin')->group(function () {
+    Route::get('/programkerja', [ProgramKerjaController::class, 'index'])->name('programkerja.index');
+    Route::get('/programkerja/create', [ProgramKerjaController::class, 'create'])->name('programkerja.create');
+    Route::post('/programkerja', [ProgramKerjaController::class, 'store'])->name('programkerja.store');
+    Route::get('/programkerja/{id}/edit', [ProgramKerjaController::class, 'edit'])->name('programkerja.edit');
+    Route::put('/programkerja/{id}', [ProgramKerjaController::class, 'update'])->name('programkerja.update');
+    Route::delete('/programkerja/{id}', [ProgramKerjaController::class, 'destroy'])->name('programkerja.destroy');
+});
+
+// route publik
+Route::get('/events', [ProgramKerjaController::class, 'publicIndex'])->name('events');
+
+
+
+// Route untuk halaman publik (DILETAKKAN DI ATAS)
+Route::get('/page/events', [EventController::class, 'publicPage'])->name('events.public');
+
+// Route resource CRUD admin
+Route::resource('events', EventController::class);

@@ -10,10 +10,6 @@ use App\Http\Controllers\StructureController;
 use App\Http\Controllers\SpreadsheetController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\FinancialController;
-<<<<<<< HEAD
-=======
-use App\Http\Controllers\ProposalController;
->>>>>>> 35d9ca5ee5a909cbeb2cd9095dd7cd9e33eef278
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 
@@ -129,13 +125,6 @@ Route::get('/transparansi-keuangan', [App\Http\Controllers\FinancialController::
 // Rute LOGIN
 // ============================
 
-<<<<<<< HEAD
-=======
-// ============================
-// Rute LOGIN
-// ============================
-
->>>>>>> 35d9ca5ee5a909cbeb2cd9095dd7cd9e33eef278
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/custom-login', [AuthController::class, 'login'])->name('custom.login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -144,7 +133,4 @@ Route::get('/logout', function () {
     session()->forget('user');
     return redirect('/');
 });
-<<<<<<< HEAD
 
-=======
->>>>>>> 35d9ca5ee5a909cbeb2cd9095dd7cd9e33eef278

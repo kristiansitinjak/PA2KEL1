@@ -105,4 +105,20 @@ class EventController extends Controller
     
         return view('events', compact('programkerjas', 'events'));
     }
+    public function register(Request $request, $id)
+{
+    $event = Event::findOrFail($id);
+
+    // Validasi data pendaftar
+    $validated = $request->validate([
+        'nama' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+    ]);
+
+    // Simpan pendaftaran (pastikan ada table pendaftarannya)
+    $event->pendaftar()->create($validated);
+
+    return back()->with('success', 'Pendaftaran berhasil!');
+}
+
 }

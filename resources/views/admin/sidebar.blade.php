@@ -136,6 +136,23 @@
         </li>
     @endif
 
+    <!-- Manajemen Pendaftaran -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePendaftaran"
+        aria-expanded="true" aria-controls="collapsePendaftaran">
+        <i class="fas fa-fw fa-user-plus"></i>
+        <span>Manajemen Pendaftaran</span>
+    </a>
+    <div id="collapsePendaftaran" class="collapse" aria-labelledby="headingPendaftaran" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{ route('admin.pendaftaran.index') }}">
+                <i class="fas fa-list"></i> Daftar Pendaftar
+            </a>
+        </div>
+    </div>
+</li>
+
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

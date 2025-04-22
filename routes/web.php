@@ -16,6 +16,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProgramKerjaController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\PendaftaranController;
 
 
 
@@ -200,6 +201,12 @@ Route::get('/events', [ProgramKerjaController::class, 'publicIndex'])->name('eve
 
 // Route untuk halaman publik (DILETAKKAN DI ATAS)
 Route::get('/page/events', [EventController::class, 'publicPage'])->name('events.public');
+Route::post('/events/register/{event}', [EventController::class, 'register'])->name('events.register');
+Route::get('/pendaftaran/{eventId}', [PendaftaranController::class, 'showForm'])->name('pendaftaran');
+Route::post('/pendaftaran/{eventId}', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
+Route::get('/admin/pendaftaran', [PendaftaranController::class, 'adminIndex'])->name('admin.pendaftaran.index');
+Route::post('/admin/pendaftaran/{pendaftar}/hadir', [PendaftaranController::class, 'updateHadir'])->name('admin.pendaftaran.updateHadir');
 
 // Route resource CRUD admin
 Route::resource('events', EventController::class);
+

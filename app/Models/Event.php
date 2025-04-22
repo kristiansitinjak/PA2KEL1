@@ -17,4 +17,9 @@ class Event extends Model
         'photo',
         'program_kerja_id',
     ];
+    public function pendaftar()
+{
+    return $this->hasMany(Pendaftar::class);
+}
+
 }

@@ -35,7 +35,7 @@
                         @if ($item->perkiraan_biaya)
                             Rp {{ number_format($item->perkiraan_biaya, 0, ',', '.') }}
                         @else
-                            -
+                            - 
                         @endif
                     </td>
                 </tr>
@@ -55,6 +55,11 @@
 
 
     {{-- BAGIAN 2: EVENT --}}
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="text-center my-5">
         <h5 class="text-uppercase text-primary">Event</h5>
         <h2 class="mb-0">Kegiatan yang Terlaksana</h2>
@@ -62,25 +67,30 @@
 
     @if($events->count())
         <div class="row">
-            @foreach($events as $event)
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        @if($event->photo)
-                            <img src="{{ asset('storage/' . $event->photo) }}" class="card-img-top" alt="{{ $event->judul }}">
-                        @endif
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $event->judul }}</h5>
-                            <p class="card-text">{{ \Illuminate\Support\Str::limit($event->deskripsi, 100) }}</p>
-                            <p class="card-text"><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}</p>
-                            <p class="card-text"><strong>Lokasi:</strong> {{ $event->lokasi }}</p>
-                        </div>
-                    </div>
+        @foreach($events as $event)
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            @if($event->photo)
+                <img src="{{ asset('storage/' . $event->photo) }}" class="card-img-top" alt="{{ $event->judul }}">
+            @endif
+            <div class="card-body">
+                <h5 class="card-title">{{ $event->judul }}</h5>
+                <p class="card-text">{{ \Illuminate\Support\Str::limit($event->deskripsi, 100) }}</p>
+                <p class="card-text"><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}</p>
+                <p class="card-text"><strong>Lokasi:</strong> {{ $event->lokasi }}</p>
+
+                {{-- Tombol untuk mengarah ke halaman pendaftaran --}}
+                <a href="{{ route('pendaftaran', $event->id) }}" class="btn btn-primary btn-sm w-100">Daftar Event</a>
                 </div>
-            @endforeach
+        </div>
+    </div>
+@endforeach
+
         </div>
     @else
         <p class="text-center">Belum ada event yang terlaksana.</p>
     @endif
 
 </div>
+
 @endsection

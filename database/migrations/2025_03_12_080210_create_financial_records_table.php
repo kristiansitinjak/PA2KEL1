@@ -4,19 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class FinancialController extends Controller
-{
-    public function index()
+return new class extends Migration {
+    public function up(): void
     {
-        $records = FinancialRecord::all();
-
-        // Hitung total pemasukan dan pengeluaran
-        $totalPemasukan = FinancialRecord::where('jenis', 'Pemasukan')->sum('jumlah');
-        $totalPengeluaran = FinancialRecord::where('jenis', 'Pengeluaran')->sum('jumlah');
-
-        // Hitung saldo akhir
-        $saldoAkhir = $totalPemasukan - $totalPengeluaran;
-
-        return view('transparansi.index', compact('records', 'totalPemasukan', 'totalPengeluaran', 'saldoAkhir'));
+        Schema::create('financial_records', function (Blueprint $table) {
+            $table->id();
+            $table->date('tanggal');
+            $table->string('keterangan');
+            $table->enum('jenis', ['Pemasukan', 'Pengeluaran']);
+            $table->decimal('jumlah', 12, 2);
+            $table->timestamps();
+        });
     }
-}
+
+    public function down(): void
+    {
+        Schema::dropIfExists('financial_records');
+    }
+};

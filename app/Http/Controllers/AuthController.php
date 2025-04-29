@@ -17,17 +17,17 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'username' => 'required|string',
+            'nim' => 'required|string',
             'password' => 'required|string|min:8',
         ]);
 
-        $username = $request->input('username');
+        $nim = $request->input('nim');
         $password = $request->input('password');
 
         try {
-            // Coba login via API CIS
+            // Authenticate via API using NIM as username
             $response = Http::asForm()->post('https://cis.del.ac.id/api/jwt-api/do-auth', [
-                'username' => $username,
+                'username' => $nim,
                 'password' => $password,
             ]);
 
@@ -40,9 +40,9 @@ class AuthController extends Controller
                     $usernameFromAPI = $user['username'] ?? null;
 
                     if ($usernameFromAPI) {
-                        // Ambil data mahasiswa
+                        // Fetch student data by NIM
                         $profileResponse = Http::withToken($token)->get(
-                            'https://cis.del.ac.id/api/library-api/mahasiswa?nama=&nim=&angkatan=&userid=&username=' . $usernameFromAPI . '&prodi=&status=Aktif&limit'
+                            'https://cis.del.ac.id/api/library-api/mahasiswa?nama=&nim=' . $nim . '&angkatan=&userid=&username=&prodi=&status=Aktif&limit'
                         );
 
                         if ($profileResponse->successful()) {
@@ -52,10 +52,20 @@ class AuthController extends Controller
                             if ($mahasiswa && ($mahasiswa['prodi_name'] ?? null) === 'DIII Teknologi Informasi') {
                                 $nama     = $mahasiswa['nama'] ?? $user['username'];
                                 $prodi    = $mahasiswa['prodi_name'] ?? null;
-                                $nim      = $mahasiswa['nim'] ?? null;
                                 $angkatan = $mahasiswa['angkatan'] ?? null;
 
-                                // Simpan/update ke tabel local_users
+                                // Map NIM to role
+                                $roleMap = [
+                                    '11323033' => 'admin',
+                                    // Tambahkan NIM lain di sini
+                                    // '11323033' => 'mahasiswa', // Boleh ditulis, tapi default juga akan jadi mahasiswa jika tidak ada di sini
+                                    // '11323034' => 'admin2',
+                                    // '11323035' => 'bendahara',
+                                    // dst.
+                                ];
+                                $role = $roleMap[$nim] ?? 'mahasiswa';
+
+                                // Save/update to local_users table
                                 $localUser = LocalUser::updateOrCreate(
                                     ['username' => $usernameFromAPI],
                                     [
@@ -63,10 +73,9 @@ class AuthController extends Controller
                                         'nim' => $nim,
                                         'angkatan' => $angkatan,
                                         'prodi' => $prodi,
+                                        'role' => $role,
                                     ]
                                 );
-
-                                $role = $localUser->role ?? 'mahasiswa';
 
                                 session([
                                     'token' => $token,
@@ -88,12 +97,12 @@ class AuthController extends Controller
                         return back()->withErrors(['login' => 'Gagal mengambil data mahasiswa.']);
                     }
 
-                    return back()->withErrors(['login' => 'Username tidak ditemukan.']);
+                    return back()->withErrors(['login' => 'NIM tidak ditemukan.']);
                 }
             }
 
-            // Fallback ke akun lokal
-            $localUser = LocalUser::where('username', $username)->first();
+            // Fallback to local account
+            $localUser = LocalUser::where('nim', $nim)->first();
 
             if ($localUser && Hash::check($password, $localUser->password)) {
                 session([
@@ -107,7 +116,7 @@ class AuthController extends Controller
                 return $this->redirectBasedOnRole($localUser->role ?? 'mahasiswa');
             }
 
-            return back()->withErrors(['login' => 'Login gagal. Pastikan username dan password benar.']);
+            return back()->withErrors(['login' => 'Login gagal. Pastikan NIM dan password benar.']);
         } catch (\Exception $e) {
             return back()->withErrors(['login' => 'Terjadi kesalahan: ' . $e->getMessage()]);
         }
